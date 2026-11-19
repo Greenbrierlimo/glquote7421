@@ -1,0 +1,1108 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Greenbrier Limo Quote Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Calm layout: one column of plain cards, the quote card beside it on wide screens, a total bar on phones. */
+:root {
+  --bg: #f4f5f4;
+  --surface: #ffffff;
+  --ink: #1c2420;
+  --muted: #66716b;
+  --line: #dde2de;
+  --accent: #1f5d43;
+  --accent-ink: #ffffff;
+  --warn: #6e4a08;
+  --warn-bg: #f8f1e2;
+  --field: #fafbfa;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111613; --surface: #181f1b; --ink: #e6ece8; --muted: #9aa8a0; --line: #2a352f;
+    --accent: #5dbb8d; --accent-ink: #0b1a11; --warn: #e3bd6a; --warn-bg: #2a2412; --field: #131a16;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.45;
+  padding-top: calc(20px + env(safe-area-inset-top, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+h1 { font-size: 1.45rem; font-weight: 700; margin: 0 0 2px; }
+.sub { color: var(--muted); margin: 0 0 16px; font-size: 0.92rem; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; align-items: start; }
+@media (min-width: 880px) { .grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } .quote { position: sticky; top: 16px; } .totalbar { display: none !important; } }
+.cards { display: grid; gap: 14px; min-width: 0; }
+.o1 { order: 1; } .o2 { order: 2; } .o3 { order: 3; } .o4 { order: 4; } .o5 { order: 5; } .o6 { order: 6; } .o7 { order: 7; } .o8 { order: 8; } .o9 { order: 9; } .o10 { order: 10; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; min-width: 0; }
+.card h2 { font-size: 1.02rem; font-weight: 600; color: var(--ink); margin: 0 0 12px; }
+.row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 12px; }
+.row.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.row.one { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 520px) { .row.three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+label { display: block; font-size: 0.86rem; font-weight: 500; color: var(--muted); margin-bottom: 5px; }
+input[type="text"], input[type="tel"], input[type="email"], input[type="number"], input[type="date"], select {
+  width: 100%; min-width: 0; font: inherit; color: var(--ink); background: var(--field);
+  border: 1px solid var(--line); border-radius: 7px; padding: 9px 10px;
+}
+input:focus-visible, select:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.seg { display: flex; gap: 8px; flex-wrap: wrap; }
+.seg label { font-weight: 500; display: flex; align-items: center; gap: 6px; margin: 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--field); color: var(--ink); font-size: 0.9rem; cursor: pointer; }
+.check { font-weight: 500; display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 0.9rem; margin: 0; }
+.hint { color: var(--muted); font-size: 0.82rem; margin: -4px 0 12px; }
+table.q { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+table.q td { padding: 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.q td:last-child { text-align: right; white-space: nowrap; padding-left: 12px; }
+table.q td:first-child { font-weight: 500; }
+table.q .sub-l { display: block; color: var(--muted); font-size: 0.8rem; font-weight: 400; }
+table.q tr.total td { font-size: 1.3rem; font-weight: 700; border-bottom: 0; padding-top: 12px; }
+table.q tr.muted td { color: var(--muted); font-weight: 400; }
+.warns { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.warns li { background: var(--warn-bg); color: var(--warn); border-radius: 7px; padding: 8px 10px; font-size: 0.85rem; }
+.tipline { font-size: 1rem; font-weight: 500; background: var(--field); border: 1px solid var(--line); border-radius: 7px; padding: 10px 12px; margin: 6px 0; overflow-wrap: anywhere; }
+.btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+button { font: inherit; font-weight: 500; border-radius: 7px; padding: 9px 14px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+a.btn { display: inline-block; text-decoration: none; font-weight: 600; border-radius: 7px; padding: 9px 14px; background: var(--accent); border: 1px solid var(--accent); color: var(--accent-ink); }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+details.more { margin-top: 12px; }
+details.more summary { cursor: pointer; color: var(--muted); font-size: 0.86rem; }
+pre.out { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-body); font-size: 0.85rem; background: var(--field); border: 1px solid var(--line); border-radius: 7px; padding: 10px 12px; margin: 10px 0 0; max-height: 260px; overflow: auto; }
+.cap { font-size: 0.78rem; color: var(--muted); margin: 6px 0 0; }
+.tcap { font-size: 0.8rem; margin: 4px 0 0; min-height: 1em; color: var(--muted); }
+.tcap.bad { color: var(--warn); }
+.totalbar { position: sticky; bottom: 0; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: var(--accent); color: var(--accent-ink); display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; }
+.totalbar b { font-size: 1.3rem; }
+.spacer { height: 12px; }
+.bk { display: flex; gap: 10px; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.bk small { display: block; color: var(--muted); font-size: 0.8rem; }
+.bk b { font-weight: 600; }
+.bk.past { opacity: 0.65; }
+.bkh { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin: 12px 0 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+.cap.bad { color: var(--warn); }
+textarea { width: 100%; min-width: 0; min-height: 96px; font: inherit; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 7px; padding: 9px 10px; resize: vertical; }
+textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[hidden] { display: none !important; }
+#sheet { display: none; }
+#sheet h2 { margin: 0; font-size: 26px; text-align: center; }
+#sheet .ctr { text-align: center; margin: 2px 0; }
+#sheet .ln { margin: 8px 0; }
+#sheet .ln b { font-weight: 700; }
+#sheet table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+#sheet td { border: 1px solid #000; padding: 6px 9px; }
+#sheet .box { display: inline-block; width: 13px; height: 13px; border: 1px solid #000; margin-right: 6px; vertical-align: -2px; }
+#sheet .chk { float: right; border: 1px solid #000; padding: 6px 10px; margin: 0 0 8px 12px; }
+#sheet .chk div { margin: 4px 0; }
+#sheet hr { border: 0; border-top: 1px solid #000; margin: 12px 0; }
+#pvbar { display: none; }
+body.pv { background: #fff !important; color: #000; }
+body.pv .wrap { display: none !important; }
+body.pv #sheet { display: block !important; color: #000; background: #fff; font: 16px/1.45 Arial, Helvetica, sans-serif; padding: 12px; max-width: 820px; margin: 0 auto; }
+body.pv #pvbar { display: block; position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid #000; padding: 10px 12px; font: 14px Arial, sans-serif; color: #000; }
+body.pv #pvbar button { margin: 0 8px 6px 0; }
+@media print {
+  #pvbar { display: none !important; }
+  html, body { background: #fff !important; }
+  .wrap { display: none !important; }
+  #sheet { display: block !important; color: #000; background: #fff; font: 15px/1.45 Arial, Helvetica, sans-serif; padding: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Greenbrier Limo Quote</h1>
+  <p class="sub">Type as the customer talks. The quote updates as you go.</p>
+
+  <div class="grid">
+    <div class="cards">
+      <section class="card o1">
+        <h2>Call notes</h2>
+        <label for="notes">Notes from the call (optional)</label>
+        <textarea id="notes" placeholder="Sharon Miller, 304 555 0100, SUV from the airport to Roanoke Friday 3pm, 4 passengers, 3 bags"></textarea>
+        <p class="cap" id="partial" aria-live="polite"></p>
+        <div class="btns">
+          <button type="button" id="fillBtn" class="primary" hidden>Fill the form from notes</button>
+          <button type="button" id="micBtn" hidden>Start dictating</button>
+        </div>
+        <p class="cap" id="fillmsg" aria-live="polite"></p>
+      </section>
+      <section class="card o1">
+        <h2>Saved bookings</h2>
+        <input type="hidden" id="bid">
+        <p class="hint">Save a booking so anyone using this page can open it, change it and print a fresh booking sheet.</p>
+        <div class="btns" style="margin:0 0 10px">
+          <button type="button" id="bSave" class="primary">Save booking</button>
+          <button type="button" id="bSaveNew">Save as new booking</button>
+          <button type="button" id="bLink">Copy booking link</button>
+          <button type="button" id="bRefresh">Refresh list</button>
+        </div>
+        <p class="cap" id="bmsg" aria-live="polite"></p>
+        <input type="text" id="bfind" class="ns" placeholder="Search by name, date or driver" autocomplete="off" style="margin-top:10px">
+        <div id="blist" style="margin-top:6px"></div>
+        <details class="more">
+          <summary>Connect to the shared sheet (one time on each device)</summary>
+          <div class="row one" style="margin-top:10px"><div><label for="syncUrl">Sheet link</label><input type="text" id="syncUrl" class="ns" autocomplete="off" placeholder="Paste the web app link"></div></div>
+          <div class="row one"><div><label for="syncPw">Sheet password</label><input type="password" id="syncPw" class="ns" autocomplete="off"></div></div>
+          <div class="btns"><button type="button" id="syncSave">Connect</button></div>
+        </details>
+      </section>
+      <section class="card o2">
+        <h2>Contact and lead passenger</h2>
+        <div class="row one"><div><label for="cname">Contact name</label><input type="text" id="cname" autocomplete="off"></div></div>
+        <div class="row">
+          <div><label for="cphone">Phone</label><input type="tel" id="cphone" autocomplete="off"></div>
+          <div><label for="cemail">Email</label><input type="email" id="cemail" autocomplete="off"></div>
+        </div>
+        <label class="check" style="margin-bottom:12px"><input type="checkbox" id="same"> Lead passenger is the same as the contact</label>
+        <div class="row" id="leadRow">
+          <div><label for="lead">Lead passenger</label><input type="text" id="lead" autocomplete="off"></div>
+          <div><label for="leadphone">Lead passenger phone</label><input type="tel" id="leadphone" autocomplete="off"></div>
+        </div>
+        <label class="check" style="margin-bottom:12px"><input type="checkbox" id="broker"> Booked through a broker</label>
+        <div id="brokerBox" class="row" hidden>
+          <div><label for="company">Broker company</label><input type="text" id="company" autocomplete="off"></div>
+          <div><label for="resv">Reservation number</label><input type="text" id="resv" autocomplete="off"></div>
+        </div>
+      </section>
+
+      <section class="card o5">
+        <h2>Vehicle and route</h2>
+        <div class="row">
+          <div>
+            <label for="vehicle">Vehicle</label>
+            <select id="vehicle">
+              <option value="yukon1">Yukon 02</option>
+              <option value="yukon2">Yukon 03</option>
+              <option value="lincoln">Lincoln</option>
+              <option value="van">Transit Van</option>
+            </select>
+          </div>
+          <div><label for="vcount">Number of vehicles</label><input type="number" id="vcount" min="1" max="3" step="1" inputmode="numeric" value="1"></div>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Trip type" style="margin-bottom:12px">
+          <label><input type="radio" name="tripType" value="set" checked> Set destination</label>
+          <label><input type="radio" name="tripType" value="custom"> Custom route</label>
+        </div>
+        <div id="setBox" class="row one">
+          <div><label for="dest">Destination (round trip from LWB)</label><select id="dest"></select></div>
+        </div>
+        <div id="customBox">
+          <p class="hint">Google Maps total: LWB, each stop in order, then back to LWB. Rounds up to the next 15 minutes.</p>
+          <div class="row">
+            <div><label for="hrs">Drive time, hours</label><input type="number" id="hrs" min="0" step="1" inputmode="numeric" value="1"></div>
+            <div><label for="mins">Drive time, minutes</label><select id="mins"><option value="0">0</option><option value="15" selected>15</option><option value="30">30</option><option value="45">45</option></select></div>
+          </div>
+          <label class="check" style="margin-bottom:12px"><input type="checkbox" id="event"> Shuttle: wedding, event or multiple transfers (3 hour minimum)</label>
+        </div>
+      </section>
+
+      <section class="card o6">
+        <h2>Transfers and rate</h2>
+        <div class="row one">
+          <div><label for="legs">Separate transfers (circled 1, 2...)</label><input type="number" id="legs" min="1" max="2" step="1" inputmode="numeric" value="1"></div>
+        </div>
+        <p class="hint">Transfer 2 gets its own route, date, time and places. Each transfer is priced and tipped on its own.</p>
+        <label class="check"><input type="checkbox" id="aff"> Sunny's Worldwide affiliate rate ($5 less per hour)</label>
+      </section>
+
+      <section class="card o7">
+        <h2>Driver</h2>
+        <div class="row one"><div><label for="driver">Driver for this trip</label>
+          <select id="driver">
+            <option value="">TBD</option>
+            <option value="Sharon">Sharon Legg</option>
+            <option value="Don">Don Wise</option>
+            <option value="David">David Alderman</option>
+            <option value="Rick">Rick Keener</option>
+            <option value="Randy">Randy Hill</option>
+            <option value="Jim">Jim Goddard</option>
+          </select></div></div>
+        <div class="row one" id="d2row" hidden><div><label for="driver2">Driver for vehicle 2</label><select id="driver2"></select></div></div>
+        <div class="row one" id="d3row" hidden><div><label for="driver3">Driver for vehicle 3</label><select id="driver3"></select></div></div>
+        <label class="check"><input type="checkbox" id="requested"> Customer requested this driver</label>
+        <p class="hint" id="drvPhones" style="margin:10px 0 0"></p>
+      </section>
+
+      <section class="card o3">
+        <h2>Trip basics</h2>
+        <div class="row">
+          <div><label for="pdate">Pickup date</label><input type="date" id="pdate"></div>
+          <div><label for="ptime">Pickup time</label><input type="text" id="ptime" placeholder="e.g. 3:30pm (15-minute steps)" autocomplete="off"><p class="tcap" id="ptimeCap" aria-live="polite"></p></div>
+        </div>
+        <div class="row">
+          <div><label for="pax"># of pax</label><input type="number" id="pax" min="0" inputmode="numeric"></div>
+        </div>
+      </section>
+
+      <section class="card o4">
+        <h2 id="hAddr">Addresses</h2>
+        <div class="row" style="grid-template-columns:minmax(0,2fr) minmax(0,1fr)"><div><label for="paddr">Pickup address</label><input type="text" id="paddr" autocomplete="off"></div><div><label for="ptail">Flight or tail #</label><input type="text" id="ptail" autocomplete="off"></div></div>
+        <label class="check" style="margin-bottom:12px"><input type="checkbox" id="multi"> Multiple stops</label>
+        <div id="stopsBox" hidden><div id="stops"></div><div class="btns" style="margin:0 0 12px"><button type="button" id="addStop">+ Add stop</button></div></div>
+        <div class="row" style="grid-template-columns:minmax(0,2fr) minmax(0,1fr)"><div><label for="daddr">Drop off address</label><input type="text" id="daddr" autocomplete="off"></div><div><label for="dtail">Flight or tail #</label><input type="text" id="dtail" autocomplete="off"></div></div>
+        <p class="hint"><a id="map1" href="#" target="_blank" rel="noopener">Open route in Google Maps</a></p>
+      </section>
+
+      <section class="card o4" id="leg2" hidden>
+        <h2>Transfer 2</h2>
+        <p class="hint">Same vehicle, driver and passengers, with its own date, time, places and route.</p>
+        <div class="row">
+          <div><label for="pdate2">Pickup date</label><input type="date" id="pdate2"></div>
+          <div><label for="ptime2">Pickup time</label><input type="text" id="ptime2" placeholder="e.g. 3:30pm (15-minute steps)" autocomplete="off"><p class="tcap" id="ptime2Cap" aria-live="polite"></p></div>
+        </div>
+        <div class="row" style="grid-template-columns:minmax(0,2fr) minmax(0,1fr)"><div><label for="paddr2">Pickup address</label><input type="text" id="paddr2" autocomplete="off"></div><div><label for="ptail2">Flight or tail #</label><input type="text" id="ptail2" autocomplete="off"></div></div>
+        <label class="check" style="margin-bottom:12px"><input type="checkbox" id="multi2"> Multiple stops</label>
+        <div id="stopsBox2" hidden><div id="stops2"></div><div class="btns" style="margin:0 0 12px"><button type="button" id="addStop2">+ Add stop</button></div></div>
+        <div class="row" style="grid-template-columns:minmax(0,2fr) minmax(0,1fr)"><div><label for="daddr2">Drop off address</label><input type="text" id="daddr2" autocomplete="off"></div><div><label for="dtail2">Flight or tail #</label><input type="text" id="dtail2" autocomplete="off"></div></div>
+        <p class="hint"><a id="map2" href="#" target="_blank" rel="noopener">Open route in Google Maps</a></p>
+        <div class="seg" role="radiogroup" aria-label="Trip type for transfer 2" style="margin-bottom:12px">
+          <label><input type="radio" name="tripType2" value="set" checked> Set destination</label>
+          <label><input type="radio" name="tripType2" value="custom"> Custom route</label>
+        </div>
+        <div id="setBox2" class="row one"><div><label for="dest2">Destination (from LWB)</label><select id="dest2"></select></div></div>
+        <div id="customBox2" hidden><div class="row"><div><label for="hrs2">Drive time, hours</label><input type="number" id="hrs2" min="0" step="1" inputmode="numeric" value="1"></div><div><label for="mins2">Drive time, minutes</label><select id="mins2"><option value="0">0</option><option value="15" selected>15</option><option value="30">30</option><option value="45">45</option></select></div></div></div>
+      </section>
+
+      <section class="card o9">
+        <h2>Extras</h2>
+        <div class="row">
+          <div><label for="other">Other fees, like tolls ($)</label><input type="number" id="other" min="0" step="1" inputmode="decimal" value="0"></div>
+        </div>
+        <div class="row three">
+          <div><label for="bags"># of bags</label><input type="number" id="bags" min="0" inputmode="numeric"></div>
+          <div><label for="seats">Car seats</label><input type="number" id="seats" min="0" inputmode="numeric"></div>
+          <div><label for="golf">Golf clubs</label><input type="number" id="golf" min="0" inputmode="numeric"></div>
+        </div>
+      </section>
+
+      <section class="card o8">
+        <h2>Wait time and after hours</h2>
+        <div class="row three">
+          <div><label for="wait">Wait (hrs)</label><input type="number" id="wait" min="0" step="0.25" inputmode="decimal" value="0"></div>
+          <div>
+            <label for="waitMode">Billing</label>
+            <select id="waitMode">
+              <option value="short">Short wait: first hour free</option>
+              <option value="full">Dinner or event: bill up front</option>
+            </select>
+          </div>
+          <div><label for="billed">Billed hrs</label><input type="number" id="billed" min="0" step="0.25" inputmode="decimal" value="0"></div>
+        </div>
+        <p class="hint">For a long dinner wait, lower the billed hours yourself (for example, a 4 hour wait billed as 3.5).</p>
+        <label class="check"><input type="checkbox" id="ahf"> After hours fee, $30 per vehicle per day (9pm to 7am)</label>
+      </section>
+
+      <section class="card o10">
+        <h2>Payment</h2>
+        <label for="payopt">Deposit or pay in full</label>
+        <select id="payopt"><option value="dep">Deposit to hold the date</option><option value="full">Pay in full</option></select>
+        <p class="hint" style="margin-top:8px">A total of $150 or less is always paid in full. Take cards in Square only.</p>
+        <div class="row" style="margin-top:12px"><div><label for="paystat">Payment status</label><select id="paystat"><option value="Not paid">Not paid</option><option value="Deposit paid">Deposit paid</option><option value="Paid in full">Paid in full</option><option value="Invoice sent">Invoice sent</option></select></div><div><label for="sqinv">Square invoice #</label><input type="text" id="sqinv" autocomplete="off"></div></div>
+      </section>
+    </div>
+
+    <aside class="card quote" aria-live="polite">
+      <h2>Quote</h2>
+      <table class="q" id="qtable"></table>
+      <ul class="warns" id="warns"></ul>
+      <div class="spacer"></div>
+      <label>Driver's tip, for the calendar event</label>
+      <div class="tipline" id="tipline"></div>
+      <p class="cap" id="tipcap"></p>
+      <div class="btns">
+        <button type="button" id="copyQuote" class="primary">Copy customer text</button>
+        <button type="button" id="copyTip">Copy tip line</button>
+        <button type="button" id="printBtn">Print booking sheet</button>
+        <button type="button" id="clearBtn">Clear form</button>
+      </div>
+      <details class="more">
+        <summary>Save or open a quote file</summary>
+        <div class="btns">
+          <button type="button" id="saveBtn">Save to Files</button>
+          <button type="button" id="saveNewBtn">Save as new copy</button>
+          <button type="button" id="openBtn">Open saved quote</button>
+        </div>
+      </details>
+      <p class="cap" id="copymsg"></p>
+      <pre class="out" id="quoteText"></pre>
+      <div class="spacer"></div>
+      <h2 style="margin-top:8px">Google Calendar</h2>
+      <pre class="out" id="calText" style="margin-top:0"></pre>
+      <div class="btns" id="calBtns"></div>
+      <p class="cap" id="calCap"></p>
+      <div class="spacer"></div>
+      <h2 style="margin-top:8px">Message to the passenger</h2>
+      <div class="row one" style="margin:0 0 10px"><div><label for="sendvia">Send by</label><select id="sendvia"><option value="text">Text</option><option value="email">Email</option></select></div></div>
+      <p class="cap" id="paxTo" style="margin:0 0 6px"></p>
+      <pre class="out" id="paxText" style="margin-top:0"></pre>
+      <div class="btns"><button type="button" id="copyPax">Copy passenger message</button><span id="emailBtns" class="btns" style="margin:0" hidden></span></div>
+      <p class="cap" id="paxCap"></p>
+      <p class="cap">Set-destination prices come from the Trip Cost sheet. Double-check them before sending real quotes.</p>
+    </aside>
+  </div>
+
+  <div class="totalbar" id="totalbar"><span>Total</span><b id="barTotal">$0</b></div>
+</div>
+
+<div id="pvbar"><button type="button" id="pvBack" style="color:#000;border-color:#000;background:#fff">Back to form</button><button type="button" id="pvPrint" style="background:#000;border-color:#000;color:#fff">Print</button><div>If Print does nothing on your iPad, tap Share in Safari, then Print. Or take a screenshot.</div></div>
+<div id="sheet"></div>
+
+<script>
+(function () {
+  var SUV = 120, VAN = 145, WAITRATE = 54, AHF = 30, DEPOSIT = 150, WAITTIP = 9;
+  // name, round-trip hours, SUV gratuity, SUV price, van gratuity, van price
+  var D = [
+    ["Roanoke", 4, 63, 480, 71, 580],
+    ["GBR (The Greenbrier resort)", 1, 15, 120, 17, 145],
+    ["Snowshoe", 4, 67, 480, 75, 580],
+    ["Hot Springs (Homestead Resort)", 3, 45, 360, 51, 435],
+    ["Beckley (BKW)", 2, 35, 260, 39, 290],
+    ["Beckley (BKW) to or from GBR", 2, 40, 260, 44, 290],
+    ["Charlotte NC (CLT)", 9, 135, 1125, 153, 1305],
+    ["Dulles DC (IAD)", 9, 135, 1125, 153, 1305],
+    ["Washington DCA", 9, 135, 1125, 153, 1305],
+    ["Charleston (CRW)", 4.5, 70, 540, 79, 652.5],
+    ["Richmond VA", 6.5, 97.5, 780, 110.5, 942.5],
+    ["Charlottesville (CHO)", 5, 75, 600, 85, 725],
+    ["Fayetteville", 2.5, 37.5, 300, 42.5, 362.5],
+    ["Raleigh NC (RDU)", 9.3, 139.5, 1116, 158.1, 1348.5],
+    ["Norfolk VA (ORF)", 11, 165, 1320, 187, 1650],
+    ["Lynchburg VA (LYH)", 5, 75, 600, 85, 725],
+    ["Marlinton", 2.5, 37.5, 300, 42.5, 362.5],
+    ["Morgantown", 7, 105, 840, 119, 1015],
+    ["Huntington", 6.5, 97.5, 780, 110.5, 942.5]
+  ];
+  var VEH = { yukon1: "Yukon 02", yukon2: "Yukon 03", lincoln: "Lincoln", van: "Transit Van" };
+  var billedManual = false, ahfManual = false;
+
+  function $(id) { return document.getElementById(id); }
+  function num(id) { var v = parseFloat($(id).value); return isNaN(v) ? 0 : v; }
+  function nf(n) { var r = Math.round(n * 100) / 100; return r % 1 === 0 ? r.toLocaleString("en-US") : r.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function money(n) { return "$" + nf(n); }
+  function hrsText(h) { return nf(h) + (h === 1 ? " hr" : " hrs"); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function hourOf(t) { if (!t) return null; var p = t.split(":"); return Number(p[0]) + Number(p[1]) / 60; }
+  function isAfter(t) { var x = hourOf(t); return x !== null && (x >= 21 || x < 7); }
+
+  // Typed pickup time: accepts 3pm, 3:30 pm, 3:30p, 330pm, 15:30 or 1530.
+  // Returns "HH:MM", "" when empty, "need" when am/pm is missing, or null when it can't be read.
+  function parseTime(s, raw) {
+    s = (s || "").toLowerCase().replace(/[\s.]/g, "");
+    if (!s) return "";
+    var m = /^(\d{1,2})(?::?(\d{2}))?(a|am|p|pm)?$/.exec(s);
+    if (!m) return null;
+    var h = +m[1], mi = m[2] ? +m[2] : 0, ap = m[3];
+    if (mi > 59) return null;
+    if (ap) {
+      if (h < 1 || h > 12) return null;
+      h = (h % 12) + (ap.charAt(0) === "p" ? 12 : 0);
+    } else {
+      if (h > 23) return null;
+      if (h >= 1 && h <= 12 && m[1].charAt(0) !== "0") return "need";
+    }
+    if (!raw) { var t = Math.round((h * 60 + mi) / 15) * 15; if (t >= 1440) t -= 1440; h = Math.floor(t / 60); mi = t % 60; }
+    return ("0" + h).slice(-2) + ":" + ("0" + mi).slice(-2);
+  }
+  function getT(id) { var r = parseTime($(id).value); return r && r !== "need" ? r : ""; }
+  function timeCap(id) {
+    var r = parseTime($(id).value), c = $(id + "Cap");
+    c.className = "tcap";
+    if (r === "") c.textContent = "";
+    else if (r === null) { c.textContent = "Type a time like 3:30pm"; c.className = "tcap bad"; }
+    else if (r === "need") { c.textContent = "Add am or pm"; c.className = "tcap bad"; }
+    else {
+      var rw = parseTime($(id).value, true);
+      c.textContent = timeText(r) + (rw !== r ? " (rounded from " + timeText(rw) + " to the nearest 15 minutes)" : "") + (isAfter(r) ? ", after hours" : "");
+    }
+  }
+
+  // Driver cell numbers, from the 9/2024 driver list. Names and numbers only.
+  var DRIVER_FULL = { Sharon: "Sharon Legg", Don: "Don Wise", David: "David Alderman", Rick: "Rick Keener", Randy: "Randy Hill", Jim: "Jim Goddard" };
+  var DRIVER_PHONE = { Sharon: "304-646-4444", Don: "304-661-1906", David: "304-667-2744", Rick: "304-667-9503", Randy: "904-577-6148", Jim: "843-475-8901" };
+  $("driver2").innerHTML = $("driver").innerHTML; $("driver3").innerHTML = $("driver").innerHTML;
+  function vcount() { return Math.max(1, Math.min(3, Math.floor(num("vcount")) || 1)); }
+  function drivers() { return [$("driver").value, $("driver2").value, $("driver3").value].slice(0, vcount()); }
+
+  var dest = $("dest");
+  D.forEach(function (d, i) { var o = document.createElement("option"); o.value = i; o.textContent = d[0] + " (" + hrsText(d[1]) + ")"; dest.appendChild(o); $("dest2").appendChild(o.cloneNode(true)); });
+
+  function tripType() { return document.querySelector('input[name="tripType"]:checked').value; }
+
+  function mapPlace(x) {
+    x = (x || "").trim();
+    if (/^lwb$/i.test(x)) return "Greenbrier Valley Airport, Lewisburg, WV";
+    if (/^gbr$/i.test(x)) return "The Greenbrier, White Sulphur Springs, WV";
+    return x;
+  }
+  function mapUrl(p, d, st) {
+    var home = mapPlace("LWB");
+    return "https://www.google.com/maps/dir/?api=1&travelmode=driving&origin=" + encodeURIComponent(home) + "&destination=" + encodeURIComponent(home) + "&waypoints=" + encodeURIComponent([mapPlace(p)].concat((st || []).map(mapPlace), [mapPlace(d)]).filter(Boolean).join("|"));
+  }
+
+  function stopVals(s) { return Array.prototype.map.call($("stops" + s).querySelectorAll("input"), function (i) { return i.value.trim(); }).filter(Boolean); }
+  function addStop(s) {
+    var box = $("stops" + s), n = box.children.length + 1, d = document.createElement("div");
+    d.style.marginBottom = "12px";
+    d.innerHTML = '<label>Stop ' + n + '</label><input type="text" autocomplete="off">';
+    d.querySelector("input").addEventListener("input", render);
+    box.appendChild(d); d.querySelector("input").focus();
+  }
+  ["", "2"].forEach(function (s) {
+    $("addStop" + s).addEventListener("click", function () { addStop(s); render(); });
+    $("multi" + s).addEventListener("change", function () { if (this.checked && !$("stops" + s).children.length) addStop(s); render(); });
+  });
+  function dateText(v) { if (!v) return ""; var p = v.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" }); }
+  function timeText(v) { if (!v) return ""; var p = v.split(":"), h = +p[0]; return ((h % 12) || 12) + ":" + p[1] + (h >= 12 ? "pm" : "am"); }
+
+  function legCalc(s, isVan, isAff) {
+    var type = document.querySelector('input[name="tripType' + s + '"]:checked').value, hours = 0, trip = 0, grat = 0, desc = "", dn = "";
+    $("setBox" + s).hidden = type !== "set"; $("customBox" + s).hidden = type !== "custom";
+    if (type === "set") {
+      var d = D[parseInt($("dest" + s).value, 10) || 0];
+      hours = d[1]; dn = d[0]; desc = d[0] + ", round trip from LWB";
+      if (isVan) { trip = d[5]; grat = d[4]; } else { trip = d[3]; grat = d[2]; }
+    } else {
+      var mins = num("hrs" + s) * 60 + num("mins" + s);
+      hours = Math.ceil(mins / 15) * 0.25;
+      if ($("event").checked && hours > 0 && hours < 3) hours = 3;
+      var rate = isVan ? VAN : SUV;
+      trip = rate * hours; grat = (isVan ? 17 : 15) * hours;
+      desc = "Custom route, " + hrsText(hours) + " at " + money(rate) + "/hr";
+    }
+    if (isAff) { trip -= 5 * hours; desc += ", affiliate rate"; }
+    return { hours: hours, trip: trip, grat: grat, desc: desc, dn: dn };
+  }
+
+  function compute() {
+    var veh = $("vehicle").value, isVan = veh === "van", isLinc = veh === "lincoln";
+    var type = tripType();
+    $("brokerBox").hidden = !$("broker").checked;
+    $("setBox").hidden = type !== "set";
+    $("customBox").hidden = type !== "custom";
+
+    if (!ahfManual) $("ahf").checked = isAfter(getT("ptime")) || (num("legs") >= 2 && isAfter(getT("ptime2")));
+
+    var wait = num("wait"), mode = $("waitMode").value;
+    if (!billedManual) $("billed").value = mode === "short" ? Math.max(0, wait - 1) : wait;
+
+    // Each vehicle is priced the same and each driver gets the same tip.
+    var vc = vcount(), isAff = $("aff").checked, legList = [legCalc("", isVan, isAff)];
+    var legs = Math.max(1, Math.min(2, Math.floor(num("legs")) || 1));
+    if (legs > 1) legList.push(legCalc("2", isVan, isAff));
+    var tips = legList.map(function (l) { return l.grat; });
+    legList.forEach(function (l) { if (vc > 1) { l.trip *= vc; l.desc += ", " + vc + " vehicles"; } });
+    var trip = 0, grat = 0, hours = 0;
+    legList.forEach(function (l) { trip += l.trip; grat += l.grat; hours = Math.max(hours, l.hours); });
+    var desc = legList.length > 1 ? "Transfer 1: " + legList[0].desc + "; Transfer 2: " + legList[1].desc : legList[0].desc;
+    var billed = num("billed"), waitCost = billed * WAITRATE * vc, waitTip = billed * WAITTIP;
+    var ahDays = 0;
+    if ($("ahf").checked) {
+      var k1 = $("pdate").value || "?", seen = {};
+      if (isAfter(getT("ptime"))) seen[k1] = 1;
+      if (legs > 1 && isAfter(getT("ptime2"))) seen[$("pdate2").value || k1] = 1;
+      ahDays = Math.max(1, Object.keys(seen).length);
+    }
+    var ahf = AHF * vc * ahDays, other = num("other");
+    var total = trip + waitCost + ahf + other;
+    return { vc: vc, legList: legList, tips: tips, legs: legs, veh: veh, isLinc: isLinc, type: type, hours: hours, trip: trip, grat: grat, desc: desc,
+      wait: wait, billed: billed, waitCost: waitCost, waitTip: waitTip, ahf: ahf, ahDays: ahDays, other: other, total: total };
+  }
+
+  var lastTip = "", lastQuote = "";
+
+  function payFull(q) { return $("payopt").value === "full" || q.total <= DEPOSIT; }
+
+  function render() {
+    timeCap("ptime"); timeCap("ptime2");
+    $("d2row").hidden = vcount() < 2; $("d3row").hidden = vcount() < 3;
+    $("leg2").hidden = !(Math.floor(num("legs")) >= 2);
+    $("hAddr").textContent = Math.floor(num("legs")) >= 2 ? "Transfer 1: pickup and drop off" : "Addresses";
+    $("map1").href = mapUrl($("paddr").value, $("daddr").value, stopVals(""));
+    $("stopsBox").hidden = !$("multi").checked; $("stopsBox2").hidden = !$("multi2").checked;
+    $("map2").href = mapUrl($("paddr2").value, $("daddr2").value, stopVals("2"));
+    $("leadRow").hidden = $("same").checked;
+    if ($("same").checked) { $("lead").value = $("cname").value; $("leadphone").value = $("cphone").value; }
+    var q = compute();
+    var name = $("cname").value.trim(), lead = $("lead").value.trim();
+    var isBroker = $("broker").checked, company = isBroker ? $("company").value.trim() : "", resv = isBroker ? $("resv").value.trim() : "";
+    var rows = "";
+    q.legList.forEach(function (lg, i) { rows += "<tr><td>" + (q.legs > 1 ? "Trip " + (i + 1) + ": " : "") + esc(VEH[q.veh]) + "<span class='sub-l'>" + esc(lg.desc) + "</span></td><td>" + money(lg.trip) + "</td></tr>"; });
+    if (q.billed > 0) rows += "<tr><td>Wait time<span class='sub-l'>" + hrsText(q.billed) + " billed at " + money(WAITRATE) + "/hr</span></td><td>" + money(q.waitCost) + "</td></tr>";
+    if (q.ahf) rows += "<tr><td>After hours fee" + (q.vc * q.ahDays > 1 ? "<span class='sub-l'>" + money(AHF) + " x " + q.vc + (q.vc === 1 ? " vehicle" : " vehicles") + " x " + q.ahDays + (q.ahDays === 1 ? " day" : " days") + "</span>" : "") + "</td><td>" + money(q.ahf) + "</td></tr>";
+    if (q.other) rows += "<tr><td>Other fees</td><td>" + money(q.other) + "</td></tr>";
+    rows += "<tr class='total'><td>Total</td><td>" + money(q.total) + "</td></tr>";
+    rows += payFull(q) ? "<tr class='muted'><td>Paid in full to confirm</td><td>" + money(q.total) + "</td></tr>" : "<tr class='muted'><td>Deposit to hold the date</td><td>" + money(DEPOSIT) + "</td></tr>";
+    if (!payFull(q)) rows += "<tr class='muted'><td>Balance due 1 to 2 days before</td><td>" + money(Math.max(0, q.total - DEPOSIT)) + "</td></tr>";
+    $("qtable").innerHTML = rows;
+    $("barTotal").textContent = money(q.total);
+
+    var w = [];
+    if (q.legs > 1 && $("pdate").value && $("pdate2").value && $("pdate2").value < $("pdate").value) w.push("Transfer 2 is dated before transfer 1. Put the transfers in date order.");
+    if (q.hours === 0) w.push("Add drive time or pick a destination to price the trip.");
+    if (q.isLinc) w.push("The Lincoln is mostly used for the SkyWest pilot runs. It only takes short trips, meaning a round trip from the garage that takes an hour or less. Check the pilot schedule first." + (q.hours > 1 ? " This trip is over an hour, so it is not a short trip." : "") + "");
+    if (q.hours > 10) w.push("Over 10 hours of driving. A hotel room is required and charged to the customer (about $200). Add it under other fees.");
+    if (q.hours + q.wait > 14) w.push("Over 14 hours of total duty time. Check with the owner before booking.");
+    if (q.billed < q.wait - 1 && $("waitMode").value === "full") w.push("Billed wait hours are lower than the expected wait. That is fine if you chose it.");
+    $("warns").innerHTML = w.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("");
+
+    var tipParts = q.tips.map(function (g) { return "$" + nf(g); });
+    var tipTxt = tipParts.join(" and ") + (q.waitTip > 0 ? " + $" + nf(q.waitTip) + " wait" : "");
+    lastTip = drivers().map(function (d, i) { return (i === 0 && $("requested").checked && d ? "Requested " : "") + (d || "[Driver]") + " tip " + tipTxt + (q.ahDays ? " +" + (30 * q.ahDays) + " AHF" : ""); }).join(" / ");
+    $("tipline").textContent = lastTip;
+    $("tipcap").textContent = "Driver's pay, already inside the price. The customer never sees it." + (q.waitTip > 0 ? " Includes $" + nf(q.waitTip) + " wait tip at $9/hr." : "");
+
+    var L = [];
+    L.push("Greenbrier Limo quote" + (name ? " for " + name : "") + (company ? " (" + company + ")" : ""));
+    if (resv) L.push("Reservation #: " + resv);
+    if (lead) L.push("Lead passenger: " + lead);
+    var pax = $("pax").value.trim();
+    L.push("");
+    q.legList.forEach(function (lg, i) {
+      var sf = i ? "2" : "", tail = function (id) { var t = $(id).value.trim(); return t ? ", flight/tail # " + t : ""; };
+      L.push(dateText($("pdate" + sf).value) || "[date]");
+      L.push((pax || "[number]") + (pax === "1" ? " passenger" : " passengers"));
+      L.push(timeText(getT("ptime" + sf)) || "[time]");
+      var defP = "[pickup address]", defD = "[destination]";
+      if (lg.dn && !/to or from/i.test(lg.dn)) { defP = "LWB Airport"; defD = /^GBR/i.test(lg.dn) ? "The Greenbrier" : lg.dn.replace(/\s*\(.*\)\s*$/, ""); }
+      L.push("Pickup: " + ($("paddr" + sf).value.trim() || defP) + tail("ptail" + sf));
+      if ($("multi" + sf).checked) stopVals(sf).forEach(function (st, k) { L.push("Stop " + (k + 1) + ": " + st); });
+      L.push("Drop off: " + ($("daddr" + sf).value.trim() || defD) + tail("dtail" + sf));
+      L.push(lg.desc.replace(", round trip from LWB", "") + ": " + money(lg.trip));
+      L.push("");
+    });
+    if (q.billed > 0) L.push("Wait time, " + hrsText(q.billed) + ": " + money(q.waitCost));
+    if (q.ahf) L.push("After hours fee: " + money(q.ahf));
+    if (q.other) L.push("Other fees: " + money(q.other));
+    L.push("Total: " + money(q.total));
+    L.push("");
+    if (payFull(q)) L.push("Payment in full of " + money(q.total) + " confirms the booking."); else L.push("A " + money(DEPOSIT) + " deposit holds the date. The balance of " + money(Math.max(0, q.total - DEPOSIT)) + " is due 1 to 2 days before the trip.");
+    L.push("");
+    L.push("We observe a 24-hour cancellation policy.");
+    L.push("Thank you for choosing Greenbrier Limo!");
+    lastQuote = L.join("\n");
+    $("quoteText").textContent = lastQuote;
+    renderCal(q);
+    renderPax(q);
+  }
+
+  // Passenger message with the driver's name and cell number. Copy only: the dispatcher sends it by hand.
+  var lastPax = "";
+  function dayShift(v, n) { var p = v.split("-"), d = new Date(+p[0], +p[1] - 1, +p[2] + n); return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }); }
+  function renderPax(q) {
+    var who = (sv("lead") || sv("cname")).split(/\s+/)[0], ds = drivers(), all = ds.every(Boolean);
+    var info = ds.filter(Boolean).map(function (d) { return DRIVER_FULL[d] + ": " + DRIVER_PHONE[d]; });
+    $("drvPhones").textContent = info.join("   |   ");
+    var L = ["Hello" + (who ? " " + who : "") + ", this is Greenbrier Limo."];
+    q.legList.forEach(function (lg, i) {
+      var sf = i ? "2" : "", pl = tripPlaces(lg, sf), tl = sv("ptail" + sf) ? " (" + tailText(sv("ptail" + sf)) + ")" : "";
+      L.push((q.legs > 1 ? "Trip " + (i + 1) + ": " : "Your ride: ") + (dateText(sv("pdate" + sf)) || "[date]") + " at " + (timeText(getT("ptime" + sf)) || "[time]") + ", pickup at " + (pl.p || "[pickup]") + tl + ".");
+    });
+    var names = ds.map(function (d) { return d ? DRIVER_FULL[d] + ", cell " + DRIVER_PHONE[d] : "[driver not chosen yet]"; });
+    L.push(ds.length > 1 ? "Your drivers: " + names.join("; ") + "." : "Your driver is " + names[0] + ".");
+    L.push("Vehicle: " + (q.vc > 1 ? q.vc + " " + vehName() + "s" : vehName()) + ".");
+    L.push("Please call, this number does not receive texts.");
+    lastPax = L.join("\n");
+    $("paxText").textContent = lastPax;
+    var to = sv("leadphone") || sv("cphone");
+    var email = sv("cemail"), isMail = $("sendvia").value === "email";
+    $("paxTo").textContent = isMail ? "Email to: " + (email || "[add the contact email]") : "Text to: " + (to || "[add a phone number]");
+    $("copyPax").disabled = !all;
+    var when = sv("pdate") ? "Send between " + dayShift(sv("pdate"), -5) + " and " + dayShift(sv("pdate"), -3) + " (3 to 5 days before). " : "";
+    $("paxCap").textContent = all ? when + "Draft wording. Review it, then send it by hand from the business number. Nothing is sent from here." : "Choose the driver first. This only copies the message once a driver is picked.";
+    $("copyPax").hidden = isMail; $("emailBtns").hidden = !isMail;
+    if (isMail) {
+      var okMail = email && /^[^\s@]+@[^\s@]+$/.test(email), eb = "";
+      function gmail(su, body) { return "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(email) + "&su=" + encodeURIComponent(su) + "&body=" + encodeURIComponent(body); }
+      if (okMail) {
+        var nm = sv("lead") || sv("cname");
+        eb += '<a class="btn" target="_blank" rel="noopener" href="' + esc(gmail("Greenbrier Limo quote" + (nm ? " for " + nm : ""), lastQuote)) + '">Email the quote</a>';
+        if (all) eb += '<a class="btn" target="_blank" rel="noopener" href="' + esc(gmail("Your Greenbrier Limo ride" + (sv("pdate") ? " on " + dateText(sv("pdate")) : ""), lastPax.split("\n").slice(0, -1).join("\n") + "\n\nReply to this email if you have any questions.\nThank you for choosing Greenbrier Limo!")) + '">Email the driver details</a>';
+      }
+      $("emailBtns").innerHTML = eb;
+      $("paxCap").textContent = !okMail ? "Add the contact email first." : all ? "Each button opens a Gmail draft. Check it, then press Send yourself. Nothing is sent from here." : "The quote email is ready. Choose the driver to get the driver details email.";
+    }
+  }
+
+  // Google Calendar event in the office format:
+  // Title "Yukon-Michael Miller-Plane Sense", location = pickup (with tail or flight #),
+  // notes: "2 pax", "DO: ...", "Michael # phone", "Reservation #...", "Sharon tip $15".
+  var DRIVER_EMAIL = { Sharon: "eagle_nest44@yahoo.com", Don: "gabesdad0421@hotmail.com", David: "davalderman@gmail.com", Rick: "Rick.keener1954@gmail.com", Randy: "randyhill490@gmail.com", Jim: "jimgoddardsc@yahoo.com" };
+  function vehName() { return { yukon1: "Yukon", yukon2: "Yukon", lincoln: "Lincoln", van: "Van" }[$("vehicle").value]; }
+  function tailText(v) { v = (v || "").trim(); if (!v) return ""; return /^n\d/i.test(v) ? "tail #" + v.toUpperCase() : "Flight " + v; }
+  function gcalStamp(dt) {
+    function p(n) { return ("0" + n).slice(-2); }
+    return dt.getFullYear() + p(dt.getMonth() + 1) + p(dt.getDate()) + "T" + p(dt.getHours()) + p(dt.getMinutes()) + "00";
+  }
+  function calEvent(i, q) {
+    var sf = i ? "2" : "", lg = q.legList[i], pl = tripPlaces(lg, sf);
+    var who = sv("lead") || sv("cname");
+    var vc = q.vc, vn = vc > 1 ? vc + " " + vehName() + "s" : vehName();
+    var title = [vn, who || "[Name]", $("broker").checked ? sv("company") : ""].filter(Boolean).join("-");
+    var loc = (pl.p === "LWB Airport" ? "LWB" : (pl.p || "[pickup]")) +(sv("ptail" + sf) ? " " + tailText(sv("ptail" + sf)) : "");
+    var n = [], pax = sv("pax");
+    if (q.legs > 1) n.push("Transfer " + (i + 1) + " of 2");
+    n.push((pax || "?") + " pax" + (vc > 1 ? " /" + vn : ""));
+    if ($("multi" + sf).checked) stopVals(sf).forEach(function (x, k) { n.push("Stop " + (k + 1) + ": " + x); });
+    n.push("DO: " + (pl.d || "[drop off]") + (sv("dtail" + sf) ? " " + tailText(sv("dtail" + sf)) : ""));
+    var ph = sv("leadphone") || sv("cphone"), first = (who || "").split(/\s+/)[0];
+    if (ph) n.push((first || "Pax") + " # " + ph);
+    if ($("broker").checked && sv("resv")) n.push("Reservation #" + sv("resv"));
+    var ds = drivers(), amt = q.tips[i] + (i === 0 ? q.waitTip : 0);
+    ds.forEach(function (drv, k) {
+      n.push((k === 0 && $("requested").checked && drv ? "Requested " : "") + (drv || "[Driver]") + " tip $" + nf(amt) + (i === 0 && q.waitTip > 0 ? " (incl. $" + nf(q.waitTip) + " wait)" : "") + ($("ahf").checked && isAfter(getT("ptime" + sf)) ? " +30 AHF" : ""));
+    });
+    var guests = ds.map(function (d) { return DRIVER_EMAIL[d]; }).filter(Boolean);
+    var d = sv("pdate" + sf), t = getT("ptime" + sf), url = "", miss = [];
+    if (!d) miss.push("pickup date");
+    if (!t) miss.push("pickup time");
+    if (!who) miss.push("passenger name");
+    if (!ph) miss.push("phone number");
+    if (!miss.length) {
+      var a = d.split("-"), b = t.split(":"), start = new Date(+a[0], +a[1] - 1, +a[2], +b[0], +b[1]), end = new Date(start.getTime() + 3600000);
+      url = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(title) +
+        "&dates=" + gcalStamp(start) + "/" + gcalStamp(end) + "&ctz=America/New_York" +
+        "&location=" + encodeURIComponent(loc) + "&details=" + encodeURIComponent(n.join("\n")) +
+        (guests.length ? "&add=" + encodeURIComponent(guests.join(",")) : "");
+    }
+    return { title: title, loc: loc, notes: n.join("\n"), when: (dateText(d) || "[date]") + ", " + (timeText(t) || "[time]"), url: url, miss: miss };
+  }
+  function renderCal(q) {
+    var txt = [], btns = "", missing = [];
+    q.legList.forEach(function (lg, i) {
+      var e = calEvent(i, q);
+      if (i) txt.push("", "----------", "");
+      txt.push(e.title, e.when, e.loc, "", e.notes);
+      if (e.url) btns += '<a class="btn" target="_blank" rel="noopener" href="' + esc(e.url) + '">' + (q.legs > 1 ? "Add transfer " + (i + 1) + " to Google Calendar" : "Add to Google Calendar") + "</a>";
+      else missing = missing.concat(e.miss);
+    });
+    $("calText").textContent = txt.join("\n");
+    $("calBtns").innerHTML = btns;
+    $("calCap").textContent = missing.length ? "To turn on the calendar button, add: " + missing.filter(function (m, k) { return missing.indexOf(m) === k; }).join(", ") + "." :
+      "Opens Google Calendar filled in. Make sure it's on the greenbrierlimo@gmail.com calendar, Chosen drivers are added as guests. If the driver is still TBD, add them by hand later. Then Save. For the 30 minute reminder, set it once as the default in Google Calendar settings (links cannot set it).";
+  }
+
+  function copy(text, label) {
+    var msg = $("copymsg");
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(label === "tip" ? $("tipline") : label === "pax" ? $("paxText") : $("quoteText"));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      msg.textContent = "Selected. Use your device's copy command.";
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { msg.textContent = "Copied."; }, fallback);
+    } catch (e) { fallback(); }
+  }
+
+  ["sendvia", "vcount", "driver2", "driver3", "cname", "company", "resv", "broker", "driver", "requested", "same", "dest2", "hrs2", "mins2", "ptail", "dtail", "pdate2", "ptime2", "paddr2", "ptail2", "daddr2", "dtail2", "legs", "aff", "payopt", "leadphone", "cphone", "cemail", "vehicle", "dest", "hrs", "mins", "event", "pdate", "lead", "pax", "bags", "seats", "golf", "paddr", "daddr", "other"].forEach(function (id) {
+    $(id).addEventListener("input", render); $(id).addEventListener("change", render);
+  });
+  ["wait", "waitMode"].forEach(function (id) {
+    $(id).addEventListener("input", function () { billedManual = false; render(); });
+    $(id).addEventListener("change", function () { billedManual = false; render(); });
+  });
+  $("billed").addEventListener("input", function () { billedManual = true; render(); });
+  $("ptime").addEventListener("input", function () { ahfManual = false; render(); });
+  $("ahf").addEventListener("change", function () { ahfManual = true; render(); });
+  Array.prototype.forEach.call(document.querySelectorAll('input[name^="tripType"]'), function (r) { r.addEventListener("change", render); });
+  $("copyTip").addEventListener("click", function () { copy(lastTip, "tip"); });
+  $("copyQuote").addEventListener("click", function () { copy(lastQuote, "quote"); });
+  $("copyPax").addEventListener("click", function () { copy(lastPax, "pax"); });
+
+  // Call notes: dictation and auto-fill are optional and only show where this view allows them.
+  var sampleFn = null, dict = null;
+  var LABELS = { cname: "contact name", company: "broker", resv: "reservation number", cphone: "contact phone", cemail: "contact email",
+    lead: "lead passenger", leadphone: "lead passenger phone", driver: "driver", paddr: "pickup address", daddr: "drop off address",
+    pax: "passengers", bags: "bags", seats: "car seats", golf: "golf clubs", pdate: "pickup date", ptime: "pickup time",
+    wait: "wait time", other: "other fees", vehicle: "vehicle", dest: "destination", waitMode: "wait billing" };
+
+  function say(t) { $("fillmsg").textContent = t; }
+
+  function applyFields(o) {
+    var filled = [];
+    function put(id, v) { $(id).value = v; filled.push(LABELS[id] || id); }
+    ["cname", "company", "resv", "cphone", "cemail", "lead", "leadphone", "paddr", "daddr"].forEach(function (k) {
+      if (typeof o[k] === "string" && o[k].trim()) put(k, o[k].trim());
+    });
+    if (typeof o.driver === "string" && o.driver.trim()) {
+      var first = o.driver.trim().split(/\s+/)[0].toLowerCase();
+      Array.prototype.forEach.call($("driver").options, function (op) {
+        if (op.value && op.value.toLowerCase() === first) put("driver", op.value);
+      });
+    }
+    ["pax", "bags", "seats", "golf", "wait", "other"].forEach(function (k) {
+      var n = Number(o[k]);
+      if (o[k] !== null && o[k] !== undefined && o[k] !== "" && isFinite(n) && n >= 0) put(k, n);
+    });
+    if (typeof o.pdate === "string" && /^\d{4}-\d{2}-\d{2}$/.test(o.pdate)) put("pdate", o.pdate);
+    if (typeof o.ptime === "string" && /^\d{1,2}:\d{2}$/.test(o.ptime)) put("ptime", timeText(o.ptime));
+    if (typeof o.vehicle === "string" && VEH[o.vehicle]) put("vehicle", o.vehicle);
+    if (o.waitMode === "full" || o.waitMode === "short") put("waitMode", o.waitMode);
+    var di = Number(o.dest);
+    if (o.dest !== null && o.dest !== undefined && o.dest !== "" && Number.isInteger(di) && di >= 0 && di < D.length) {
+      document.querySelector('input[name="tripType"][value="set"]').checked = true; put("dest", di);
+    }
+    if (o.broker === true || o.company || o.resv) { $("broker").checked = true; }
+    billedManual = false; ahfManual = false;
+    render();
+    return filled;
+  }
+
+  function fillFromNotes() {
+    var text = $("notes").value.trim();
+    if (!text) { say("Type or dictate the caller's details first."); return; }
+    var now = new Date();
+    var today = now.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+    var list = D.map(function (d, i) { return i + " = " + d[0]; }).join("\n");
+    var prompt = "You fill in a limo booking form from a dispatcher's notes of a phone call. Today is " + today + ".\n" +
+      "Reply with only one JSON object. Include a key only when the notes clearly state it. Never guess or invent a value.\n" +
+      "Keys:\n" +
+      "cname: name of the person who contacted us\n" +
+      "company: broker company name, only if booked through a broker\n" +
+      "broker: true only if a broker or a reservation number is mentioned\n" +
+      "resv: the broker's reservation number\n" +
+      "cphone, cemail: the contact's phone and email\n" +
+      "lead: the lead passenger's name\n" +
+      "leadphone: the lead passenger's phone\n" +
+      "vehicle: one of yukon1, lincoln, van (use yukon1 for an SUV or a Yukon)\n" +
+      "pax, bags, seats, golf: numbers of passengers, bags, car seats, golf clubs\n" +
+      "pdate: pickup date as YYYY-MM-DD\n" +
+      "ptime: pickup time as 24-hour HH:MM\n" +
+      "paddr, daddr: pickup and drop off addresses (include an airport tail number if given)\n" +
+      "dest: the number of the matching destination, only if the trip goes to one of these places:\n" + list + "\n" +
+      "wait: hours of wait time requested, as a number\n" +
+      "waitMode: full if the wait is for a dinner or an event, otherwise short\n" +
+      "other: other fees in dollars, as a number\n" +
+      "driver: the driver's name\n\nNotes:\n" + text;
+    var btn = $("fillBtn"); btn.disabled = true; say("Reading the notes...");
+    sampleFn.json(prompt, { modelTier: "quick" }).then(function (o) {
+      if (!o || typeof o !== "object" || Array.isArray(o)) { say("I couldn't read the notes. Try adding more detail."); return; }
+      var f = applyFields(o);
+      say(f.length ? "Filled: " + f.join(", ") + ". Check each field before you send the quote." : "Nothing in the notes matched a field yet.");
+    }).catch(function (e) {
+      var c = e && e.code;
+      say(c === "not_granted" ? "Allow Claude to read the notes when asked, then try again."
+        : c === "rate_limited" ? "Too many requests right now. Wait a moment and try again."
+        : c === "invalid_json" ? "I couldn't read that. Try again, or add more detail."
+        : "Auto-fill didn't work this time. You can still type the fields.");
+    }).then(function () { btn.disabled = false; });
+  }
+  $("fillBtn").addEventListener("click", fillFromNotes);
+
+  if (window.claude && window.claude.use) {
+    window.claude.use("sample").then(function (s) {
+      if (s) { sampleFn = s; $("fillBtn").hidden = false; }
+    }).catch(function () {});
+    window.claude.use("dictation").then(function (d) {
+      if (!d) return;
+      dict = d; $("micBtn").hidden = false;
+      d.onPartial(function (e) { $("partial").textContent = e.text ? "Hearing: " + e.text : ""; });
+      d.onFinal(function (e) { var t = $("notes"); t.value = t.value ? t.value + e.text : e.text.replace(/^\s+/, ""); });
+      d.onState(function (e) { $("micBtn").textContent = e.state === "idle" ? "Start dictating" : "Stop dictating"; if (e.state === "idle") $("partial").textContent = ""; });
+    }).catch(function () {});
+  }
+  $("micBtn").addEventListener("click", function () {
+    if (!dict) return;
+    if (dict.active()) { dict.stop().catch(function () {}); return; }
+    dict.start().catch(function (e) {
+      var c = e && e.code;
+      if (c === "not_granted") say("Dictation is turned off for this page. Type the notes instead.");
+      else if (c !== "stopped" && c !== "dismissed") say("Dictation isn't available right now. Type the notes instead.");
+    });
+  });
+
+  function sv(id) { var e = $(id); return e ? (e.value || "").trim() : ""; }
+  function tripPlaces(lg, sf) {
+    var p = "", d = "";
+    if (lg.dn && !/to or from/i.test(lg.dn)) { p = "LWB Airport"; d = /^GBR/i.test(lg.dn) ? "The Greenbrier" : lg.dn.replace(/\s*\(.*\)\s*$/, ""); }
+    return { p: sv("paddr" + sf) || p, d: sv("daddr" + sf) || d };
+  }
+  function fillSheet(q) {
+    var h = "";
+    var today = new Date().toLocaleDateString("en-US", { month: "numeric", day: "numeric", year: "numeric" });
+    var broker = $("broker").checked ? " &nbsp; Broker: " + esc(sv("company")) + (sv("resv") ? ", Res # " + esc(sv("resv")) : "") : "";
+    h += '<div class="chk"><div><span class="box"></span>Calendar</div><div><span class="box"></span>Invited driver to the event</div><div><span class="box"></span>Paid in full on ______</div><div><span class="box"></span>Texted pax the driver info</div><div><span class="box"></span>Texted driver a reminder</div></div>';
+    h += '<div class="ln"><span class="box"></span>Deposit &nbsp;&nbsp; <span class="box"></span>Paid</div>';
+    h += "<h2>Greenbrier Limo</h2>";
+    h += '<div class="ctr">584 Airport Rd. Suite 5, Lewisburg WV 24901</div><div class="ctr">(O) 304-647-4888 (C) 304-520-7273</div><div class="ctr">Greenbrierlimo@gmail.com</div><div style="clear:both"></div><hr>';
+    h += '<div class="ln"><b>Contacted by:</b> ' + esc(sv("cname")) + broker + ' &nbsp;&nbsp; <b>Date:</b> ' + today + "</div>";
+    h += '<div class="ln"><b>Phone:</b> ' + esc(sv("cphone")) + ' &nbsp;&nbsp; <b>Email:</b> ' + esc(sv("cemail")) + "</div>";
+    h += '<div class="ln"><b>Vehicle:</b> ' + esc(VEH[q.veh]) + (q.vc > 1 ? " x " + q.vc : "") + "</div>";
+    h += '<div class="ln"><b>Lead pax:</b> ' + esc(sv("lead")) + ' &nbsp;&nbsp; <b>Phone:</b> ' + esc(sv("leadphone")) + "</div>";
+    h += '<div class="ln"><b># of pax:</b> ' + esc(sv("pax")) + ' &nbsp; <b># of bags:</b> ' + esc(sv("bags")) + ' &nbsp; <b>Car seats:</b> ' + esc(sv("seats")) + ' &nbsp; <b># of golf clubs:</b> ' + esc(sv("golf")) + "</div><hr>";
+    q.legList.forEach(function (lg, i) {
+      var sf = i ? "2" : "", pl = tripPlaces(lg, sf), st = $("multi" + sf).checked ? stopVals(sf) : [];
+      var tl = function (id) { return sv(id) ? " (flight/tail # " + esc(sv(id)) + ")" : ""; };
+      if (q.legs > 1) h += '<div class="ln"><b>Trip ' + (i + 1) + "</b></div>";
+      h += '<div class="ln"><b>Pick up date:</b> ' + esc(dateText(sv("pdate" + sf))) + ' &nbsp;&nbsp; <b>Pick up time:</b> ' + esc(timeText(getT("ptime" + sf))) + "</div>";
+      h += '<div class="ln"><b>Pick up address:</b> ' + esc(pl.p) + tl("ptail" + sf) + "</div>";
+      st.forEach(function (x, k) { h += '<div class="ln"><b>Stop ' + (k + 1) + ":</b> " + esc(x) + "</div>"; });
+      h += '<div class="ln"><b>Drop off address:</b> ' + esc(pl.d) + tl("dtail" + sf) + "</div>";
+    });
+    h += "<table>";
+    q.legList.forEach(function (lg, i) { h += "<tr><td>" + (q.legs > 1 ? "Trip " + (i + 1) + ": " : "") + esc(VEH[q.veh]) + " - " + esc(lg.desc) + "</td><td>" + money(lg.trip) + "</td></tr>"; });
+    if (q.billed > 0) h += "<tr><td>Wait time, " + hrsText(q.billed) + " at " + money(WAITRATE) + "/hr</td><td>" + money(q.waitCost) + "</td></tr>";
+    if (q.ahf) h += "<tr><td>After hours fee (9pm-7am)</td><td>" + money(q.ahf) + "</td></tr>";
+    if (q.other) h += "<tr><td>Other fees</td><td>" + money(q.other) + "</td></tr>";
+    h += "<tr><td><b>TOTAL</b></td><td><b>" + money(q.total) + "</b></td></tr></table>";
+    if (payFull(q)) h += '<div class="ln"><b>Deposit $</b> none &nbsp;&nbsp; <b>Paid in full:</b> ' + money(q.total) + " &nbsp; Date paid ________</div>";
+    else h += '<div class="ln"><b>Deposit $</b> ' + money(DEPOSIT) + " &nbsp; Date paid ________ &nbsp;&nbsp; <b>Balance due $</b> " + money(Math.max(0, q.total - DEPOSIT)) + " &nbsp; Date paid ________</div>";
+    h += '<div class="ln"><b>' + (q.vc > 1 ? "Drivers" : "Driver") + ':</b> ' + esc(drivers().filter(Boolean).join(", ")) + ($("requested").checked && sv("driver") ? " (requested)" : "") + ' &nbsp;&nbsp; <b>Tip:</b> ' + esc(lastTip) + "</div>";
+    h += '<div class="ln"><b>Payment status:</b> ' + esc(sv("paystat")) + (sv("sqinv") ? ' &nbsp;&nbsp; <b>Square invoice #:</b> ' + esc(sv("sqinv")) : "") + "</div>";
+    h += '<div class="ln" style="font-size:12px">Payment goes through Square. No card numbers on this sheet.</div>';
+    var bl = bookingLink();
+    if (bl) h += '<div class="ln" style="font-size:12px">Booking link: <a href="' + esc(bl) + '">' + esc(bl) + "</a></div>";
+    $("sheet").innerHTML = h;
+  }
+  $("printBtn").addEventListener("click", function () {
+    render(); fillSheet(compute());
+    document.body.classList.add("pv"); window.scrollTo(0, 0);
+  });
+  $("pvBack").addEventListener("click", function () { document.body.classList.remove("pv"); window.scrollTo(0, 0); });
+  $("pvPrint").addEventListener("click", function () { try { window.print(); } catch (e) {} });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".wrap h2"), function (h) {
+    var t = h.textContent.trim();
+    if (["Transfers and rate", "Wait time and after hours", "Extras"].indexOf(t) < 0) return;
+    var body = document.createElement("div"), arrow = document.createElement("span");
+    body.hidden = true;
+    while (h.nextSibling) body.appendChild(h.nextSibling);
+    h.parentNode.appendChild(body);
+    h.style.marginBottom = "0";
+    arrow.textContent = "  ▸"; arrow.style.opacity = "0.6";
+    h.appendChild(arrow);
+    h.style.cursor = "pointer"; h.setAttribute("role", "button"); h.setAttribute("tabindex", "0"); h.setAttribute("aria-expanded", "false");
+    var toggle = function () { body.hidden = !body.hidden; arrow.textContent = body.hidden ? "  ▸" : "  ▾"; h.style.marginBottom = body.hidden ? "0" : "12px"; h.setAttribute("aria-expanded", String(!body.hidden)); };
+    h.addEventListener("click", toggle);
+    h.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  });
+
+  var DEF = {}, clearTimer = null;
+  var allFields = function () { return document.querySelectorAll(".wrap input:not(.ns), .wrap select:not(.ns), .wrap textarea:not(.ns)"); };
+  Array.prototype.forEach.call(allFields(), function (e) {
+    if (e.type === "radio") DEF["r:" + e.name + ":" + e.value] = e.checked;
+    else if (e.id) DEF[e.id] = e.type === "checkbox" ? e.checked : e.value;
+  });
+  $("clearBtn").addEventListener("click", function () {
+    var b = this;
+    if (!clearTimer) {
+      b.textContent = "Tap again to clear everything";
+      clearTimer = setTimeout(function () { b.textContent = "Clear form"; clearTimer = null; }, 4000);
+      return;
+    }
+    clearTimeout(clearTimer); clearTimer = null; b.textContent = "Clear form";
+    Array.prototype.forEach.call(allFields(), function (e) {
+      if (e.type === "radio") e.checked = DEF["r:" + e.name + ":" + e.value];
+      else if (e.id && (e.id in DEF)) { if (e.type === "checkbox") e.checked = DEF[e.id]; else e.value = DEF[e.id]; }
+    });
+    ["", "2"].forEach(function (x) { $("stops" + x).innerHTML = ""; });
+    ahfManual = false; billedManual = false;
+    fileHandle = null; curName = "";
+    render();
+    $("copymsg").textContent = "Form cleared.";
+    window.scrollTo(0, 0);
+  });
+
+  function collectState() {
+    var f = {}, r = {}, st = {};
+    Array.prototype.forEach.call(allFields(), function (e) {
+      if (e.type === "radio") r[e.name + "|" + e.value] = e.checked;
+      else if (e.id && (e.id in DEF)) f[e.id] = e.type === "checkbox" ? e.checked : e.value;
+    });
+    ["", "2"].forEach(function (x) { st[x || "1"] = Array.prototype.map.call($("stops" + x).querySelectorAll("input"), function (i) { return i.value; }); });
+    return { app: "greenbrier-quote", v: 1, saved: new Date().toISOString(), f: f, r: r, s: st };
+  }
+  function applyState(d) {
+    if (!d || d.app !== "greenbrier-quote" || !d.f) throw new Error("not a quote file");
+    Array.prototype.forEach.call(allFields(), function (e) {
+      if (e.type === "radio") { var k = e.name + "|" + e.value; if (d.r && k in d.r) e.checked = !!d.r[k]; }
+      else if (e.id && (e.id in DEF) && (e.id in d.f)) { if (e.type === "checkbox") e.checked = !!d.f[e.id]; else e.value = d.f[e.id]; }
+    });
+    [["", "1"], ["2", "2"]].forEach(function (x) {
+      $("stops" + x[0]).innerHTML = "";
+      ((d.s && d.s[x[1]]) || []).forEach(function (v) { addStop(x[0]); var ins = $("stops" + x[0]).querySelectorAll("input"); ins[ins.length - 1].value = v; });
+    });
+    // Quotes saved by the old form store times as 24-hour "15:00"; show them as "3:00pm".
+    ["ptime", "ptime2"].forEach(function (id) { var v = d.f[id] || ""; if (/^\d{1,2}:\d{2}$/.test(v)) $(id).value = timeText(v); });
+    ["", "2"].forEach(function (x) {
+      var m = Math.ceil(num("mins" + x) / 15) * 15, h = num("hrs" + x);
+      if (m >= 60) { m = 0; h += 1; }
+      $("mins" + x).value = String(m); $("hrs" + x).value = h;
+    });
+    ahfManual = true; billedManual = true;
+    render();
+  }
+  var fileHandle = null, curName = "";
+  function msg(t) { $("copymsg").textContent = t; }
+  function autoName(st) {
+    var who = (st.f.lead || st.f.cname || "quote").replace(/[^A-Za-z0-9 _-]/g, "").trim().replace(/\s+/g, "-") || "quote";
+    return "Greenbrier-" + who + "-" + (st.f.pdate || new Date().toISOString().slice(0, 10)) + ".json";
+  }
+  function downloadFile(name, text) {
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], { type: "application/json" }));
+    a.download = name; document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  }
+  function saveQuote(asNew) {
+    var st = collectState(), text = JSON.stringify(st);
+    if (asNew) { fileHandle = null; curName = ""; }
+    var name = curName || autoName(st);
+    function plain() {
+      try { downloadFile(name, text); curName = name; msg("Saved as " + name + ". Look in your Downloads or Files app."); }
+      catch (e) { msg("Saving is blocked in this view. Open the form file in your browser and try again."); }
+    }
+    if (fileHandle) {
+      fileHandle.createWritable().then(function (w) { return w.write(text).then(function () { return w.close(); }); })
+        .then(function () { msg("Updated " + name + "."); }, function () { fileHandle = null; plain(); });
+    } else if (window.showSaveFilePicker) {
+      window.showSaveFilePicker({ suggestedName: name, types: [{ description: "Greenbrier quote", accept: { "application/json": [".json"] } }] })
+        .then(function (h) { fileHandle = h; curName = h.name; return h.createWritable(); })
+        .then(function (w) { return w.write(text).then(function () { return w.close(); }); })
+        .then(function () { msg("Saved " + curName + ". Press Save to Files again to update it."); }, function (e) { if (!e || e.name !== "AbortError") plain(); });
+    } else plain();
+  }
+  function loadText(txt, name, handle) {
+    try { applyState(JSON.parse(txt)); fileHandle = handle || null; curName = name; msg("Opened " + name + ". Save to Files will update it."); }
+    catch (e) { msg("That file is not a saved quote."); }
+  }
+  $("saveBtn").addEventListener("click", function () { saveQuote(false); });
+  $("saveNewBtn").addEventListener("click", function () { saveQuote(true); });
+  $("openBtn").addEventListener("click", function () {
+    function fallback() {
+      var inp = document.createElement("input");
+      inp.type = "file"; inp.accept = ".json,application/json"; inp.style.display = "none";
+      document.body.appendChild(inp);
+      inp.addEventListener("change", function () {
+        var file = inp.files && inp.files[0];
+        if (!file) { inp.remove(); return; }
+        var rd = new FileReader();
+        rd.onload = function () { loadText(rd.result, file.name, null); inp.remove(); };
+        rd.readAsText(file);
+      });
+      inp.click();
+    }
+    if (window.showOpenFilePicker) {
+      window.showOpenFilePicker({ types: [{ description: "Greenbrier quote", accept: { "application/json": [".json"] } }] })
+        .then(function (hs) { var h = hs[0]; return h.getFile().then(function (f) { return f.text().then(function (t) { loadText(t, f.name, h); }); }); },
+          function (e) { if (!e || e.name !== "AbortError") fallback(); });
+    } else fallback();
+  });
+
+  // ---- Saved bookings. Each booking is one row in a Google Sheet. The link and password are typed once per device.
+  var SYNC_KEY = "glq-sync", bookings = [];
+  function syncGet() { try { var o = JSON.parse(localStorage.getItem(SYNC_KEY) || "null"); return o && o.url && o.pw ? o : null; } catch (e) { return null; } }
+  function bmsg(t, bad) { var m = $("bmsg"); m.textContent = t; m.className = "cap" + (bad ? " bad" : ""); }
+  function syncCall(action, extra) {
+    var cfg = syncGet();
+    if (!cfg) return Promise.reject({ code: "setup" });
+    var body = { action: action, secret: cfg.pw };
+    Object.keys(extra || {}).forEach(function (k) { body[k] = extra[k]; });
+    return fetch(cfg.url, { method: "POST", body: JSON.stringify(body) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j.ok) throw { code: "server", msg: j.error }; return j; });
+  }
+  function bfail(e) {
+    if (e && e.code === "setup") bmsg("Connect the shared sheet first. Open the Connect section below.", true);
+    else if (e && e.code === "server" && e.msg === "password") bmsg("The sheet password does not match. Check it in the Connect section.", true);
+    else if (e && e.code === "server") bmsg("The sheet answered with an error: " + e.msg, true);
+    else bmsg("Could not reach the sheet. Check the internet connection, or use Save to Files for now.", true);
+  }
+  function rowLine(b) {
+    var d = b.date ? dateText(String(b.date)) : "No date", p = [b.time, b.vehicle, b.driver ? "Driver: " + b.driver : "", b.total ? money(Number(b.total)) : "", b.status].filter(Boolean);
+    return { top: d + " - " + (b.name || "No name"), sub: p.join(" | ") };
+  }
+  function drawList() {
+    var box = $("blist"), f = $("bfind").value.trim().toLowerCase(), today = new Date().toISOString().slice(0, 10);
+    box.innerHTML = "";
+    var rows = bookings.filter(function (b) { return !f || (rowLine(b).top + " " + rowLine(b).sub + " " + (b.phone || "")).toLowerCase().indexOf(f) >= 0; });
+    var up = rows.filter(function (b) { return !b.date || String(b.date) >= today; }).sort(function (a, b) { return String(a.date || "9999").localeCompare(String(b.date || "9999")); });
+    var past = rows.filter(function (b) { return b.date && String(b.date) < today; }).sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
+    function group(title, list, cls) {
+      if (!list.length) return;
+      var h = document.createElement("div"); h.className = "bkh"; h.textContent = title; box.appendChild(h);
+      list.forEach(function (b) {
+        var r = document.createElement("div"), l = rowLine(b), t = document.createElement("div"), bt = document.createElement("button");
+        r.className = "bk " + cls;
+        t.innerHTML = "<b></b><small></small>"; t.firstChild.textContent = l.top; t.lastChild.textContent = l.sub;
+        bt.type = "button"; bt.textContent = "Open";
+        bt.addEventListener("click", function () { openBooking(b.id); });
+        r.appendChild(t); r.appendChild(bt); box.appendChild(r);
+      });
+    }
+    group("Upcoming", up, "");
+    group("Past", past, "past");
+    if (!rows.length) { var e = document.createElement("p"); e.className = "cap"; e.textContent = bookings.length ? "No bookings match." : "No saved bookings yet."; box.appendChild(e); }
+  }
+  function loadList() {
+    if (!syncGet()) { $("blist").innerHTML = ""; return Promise.resolve(); }
+    return syncCall("list").then(function (j) { bookings = j.rows || []; drawList(); }).catch(bfail);
+  }
+  function openBooking(id) {
+    bmsg("Opening...");
+    syncCall("get", { id: id }).then(function (j) {
+      applyState(JSON.parse(j.data)); $("bid").value = id;
+      bmsg("Opened. Change what you need, then tap Save booking to update it. Print booking sheet makes a fresh page.");
+      window.scrollTo(0, 0);
+    }).catch(bfail);
+  }
+  function saveBooking(asNew) {
+    if (asNew) $("bid").value = "";
+    var q = compute(), name = sv("lead") || sv("cname");
+    if (!name && !sv("pdate")) { bmsg("Add a passenger name or a pickup date before saving.", true); return; }
+    if (!$("bid").value) $("bid").value = "b" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    var summary = { date: sv("pdate"), time: timeText(getT("ptime")), name: name, phone: sv("leadphone") || sv("cphone"), vehicle: (q.vc > 1 ? q.vc + " " : "") + vehName(), driver: drivers().filter(Boolean).join(", "), total: q.total, status: sv("paystat") };
+    bmsg("Saving...");
+    syncCall("save", { id: $("bid").value, summary: summary, data: JSON.stringify(collectState()) })
+      .then(function () { bmsg("Saved. Everyone using the page can open it from the list."); return loadList(); }).catch(bfail);
+  }
+  $("bSave").addEventListener("click", function () { saveBooking(false); });
+  $("bSaveNew").addEventListener("click", function () { saveBooking(true); });
+  $("bRefresh").addEventListener("click", function () { bmsg("Refreshing..."); loadList().then(function () { if ($("bmsg").className.indexOf("bad") < 0) bmsg(""); }); });
+  $("bfind").addEventListener("input", drawList);
+  $("syncSave").addEventListener("click", function () {
+    var u = $("syncUrl").value.trim(), p = $("syncPw").value;
+    if (!/^https:\/\/script\.google\.com\//.test(u) || !p) { bmsg("Paste the full sheet link (it starts with https://script.google.com/) and the password.", true); return; }
+    try { localStorage.setItem(SYNC_KEY, JSON.stringify({ url: u, pw: p })); } catch (e) { bmsg("This browser will not remember the link. Turn off private browsing and try again.", true); return; }
+    $("syncPw").value = ""; bmsg("Connected. Loading bookings...");
+    loadList().then(function () { if ($("bmsg").className.indexOf("bad") < 0) bmsg("Connected."); });
+  });
+  function bookingLink() { var id = $("bid").value; return id && /^https?:/.test(location.href) ? location.href.split("#")[0] + "#b=" + id : ""; }
+  $("bLink").addEventListener("click", function () {
+    var id = $("bid").value, link = bookingLink();
+    if (!id) { bmsg("Save the booking first, then copy its link.", true); return; }
+    if (!link) { bmsg("The link only works from the web page, not from a file on your device.", true); return; }
+    try { navigator.clipboard.writeText(link).then(function () { bmsg("Booking link copied. Anyone connected to the shared sheet can open it."); }, function () { bmsg("Link: " + link); }); }
+    catch (e) { bmsg("Link: " + link); }
+  });
+  (function () {
+    var c = syncGet(), m = /[#&]b=([A-Za-z0-9]+)/.exec(location.hash);
+    if (c) { $("syncUrl").value = c.url; $("syncPw").placeholder = "Saved on this device"; loadList(); }
+    if (m) { if (c) openBooking(m[1]); else bmsg("Connect the shared sheet first (Connect section below), then open the booking link again.", true); }
+  })();
+
+  render();
+})();
+</script>
+</body>
+</html>
+
+</body></html>
