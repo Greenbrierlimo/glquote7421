@@ -81,6 +81,8 @@ table.q tr.muted td { color: var(--muted); font-weight: 400; }
 .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
 .goto { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 14px; }
 .goto button { font-size: 14px; padding: 8px 12px; }
+.chip { padding: 7px 12px; font-size: 14px; }
+.chip.sel { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 button { font: inherit; font-weight: 500; border-radius: 7px; padding: 9px 14px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
 a.btn { display: inline-block; text-decoration: none; font-weight: 600; border-radius: 7px; padding: 9px 14px; background: var(--accent); border: 1px solid var(--accent); color: var(--accent-ink); }
 button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
@@ -342,6 +344,8 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
         </div>
         <p class="hint">For a long dinner wait, lower the billed hours yourself (for example, a 4 hour wait billed as 3.5).</p>
         <label class="check"><input type="checkbox" id="ahf"> After hours fee, $30 per vehicle per day (9pm to 7am)</label>
+        <div id="ahdWrap" hidden><p class="hint" style="margin:8px 0 4px">Which day is after hours? Tap the day or days. Automatic uses the pickup times.</p><div class="btns" id="ahdChips" style="margin-top:4px"></div></div>
+        <input type="hidden" id="ahdays" value="">
       </section>
 
       <section class="card o10">
@@ -565,14 +569,50 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
       if (legs > 1 && isAfter(getT("ptime2"))) seen[$("pdate2").value || k1] = 1;
       ahDays = Math.max(1, Object.keys(seen).length);
     }
+    var ahList = null;
+    if ($("ahf").checked) { ahList = parseAhd(); if (ahList) ahDays = ahList.length; }
     var ahf = AHF * vc * ahDays, other = num("other");
     var total = trip + waitCost + ahf + other;
     return { vc: vc, legList: legList, tips: tips, legs: legs, veh: veh, isLinc: isLinc, type: type, hours: hours, trip: trip, grat: grat, desc: desc,
-      wait: wait, billed: billed, waitCost: waitCost, waitTip: waitTip, ahf: ahf, ahDays: ahDays, other: other, total: total };
+      wait: wait, billed: billed, waitCost: waitCost, waitTip: waitTip, ahf: ahf, ahDays: ahDays, ahList: ahList, other: other, total: total };
   }
 
   var lastTip = "", lastQuote = "";
 
+  function tripDates() { var d = []; if ($("pdate").value) d.push($("pdate").value); if (Math.floor(num("legs")) >= 2 && $("pdate2").value) d.push($("pdate2").value); return d.filter(function (x, k, a) { return a.indexOf(x) === k; }).sort(); }
+  function parseAhd() {
+    var raw = $("ahdays").value.trim(); if (!raw) return null;
+    var n = tripDays(), set = {};
+    raw.split(",").forEach(function (t) { t = t.trim(); var k = t === "L" ? n : parseInt(t, 10); if (k >= 1 && k <= n) set[k] = 1; });
+    var ks = Object.keys(set).map(Number).sort(function (a, b) { return a - b; });
+    return ks.length ? ks : null;
+  }
+  function ahDayText(q) { var n = tripDays(); return q.ahList.length === 1 && q.ahList[0] === n && n > 1 ? "last day" : "day " + q.ahList.join(", "); }
+  function dayLabel(i) { var ds = tripDates(); if (!ds.length) return ""; if (!$("tdaysm").checked && ds.length === tripDays()) return dayShift(ds[i - 1], 0); return dayShift(ds[0], i - 1); }
+  function ahOnLeg(i, sf, q) {
+    if (!q.ahList) return isAfter(getT("ptime" + sf));
+    var ds = tripDates(), d = $("pdate" + sf).value, idx = i + 1;
+    if (d && ds.length) { if (ds.length === tripDays()) idx = ds.indexOf(d) + 1; else { var a = ds[0].split("-"), b = d.split("-"); idx = Math.round((new Date(+b[0], +b[1] - 1, +b[2]) - new Date(+a[0], +a[1] - 1, +a[2])) / 86400000) + 1; } }
+    return q.ahList.indexOf(idx) >= 0;
+  }
+  function drawAhd() {
+    var wrap = $("ahdWrap"); wrap.hidden = !$("ahf").checked; if (wrap.hidden) return;
+    var n = tripDays(), shown = Math.min(n, 14), raw = $("ahdays").value.trim(), cur = raw ? raw.split(",").map(function (t) { return t.trim(); }) : [], box = $("ahdChips");
+    box.innerHTML = "";
+    function chip(label, tok) {
+      var b = document.createElement("button"); b.type = "button";
+      b.className = "chip" + ((tok === "" ? !cur.length : cur.indexOf(tok) >= 0) ? " sel" : ""); b.textContent = label;
+      b.addEventListener("click", function () {
+        var c = $("ahdays").value.trim() ? $("ahdays").value.split(",").map(function (t) { return t.trim(); }) : [];
+        if (tok === "") c = []; else { var ix = c.indexOf(tok); if (ix >= 0) c.splice(ix, 1); else c.push(tok); }
+        $("ahdays").value = c.join(","); render();
+      });
+      box.appendChild(b);
+    }
+    chip("Automatic", "");
+    for (var i = 1; i <= shown; i++) { var lb = dayLabel(i); chip("Day " + i + (lb ? " " + lb : ""), String(i)); }
+    if (n > 1) chip("Last day", "L");
+  }
   function autoDays() { var d = {}; if ($("pdate").value) d[$("pdate").value] = 1; if (Math.floor(num("legs")) >= 2 && $("pdate2").value) d[$("pdate2").value] = 1; return Math.max(1, Object.keys(d).length); }
   function tripDays() { if ($("tdaysm").checked) { var n = Math.floor(Number($("tdays").value)); if (n >= 1) return Math.min(n, 60); } return autoDays(); }
   function depositAmt(q) { return DEPOSIT * tripDays() * q.vc; }
@@ -582,6 +622,7 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
 
   function render() {
     if (!$("tdaysm").checked) $("tdays").value = autoDays();
+    drawAhd();
     timeCap("ptime"); timeCap("ptime2");
     $("d2row").hidden = vcount() < 2; $("d3row").hidden = vcount() < 3;
     var two = Math.floor(num("legs")) >= 2;
@@ -600,7 +641,7 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
     var rows = "";
     q.legList.forEach(function (lg, i) { rows += "<tr><td>" + (q.legs > 1 ? "Trip " + (i + 1) + ": " : "") + esc(VEH[q.veh]) + "<span class='sub-l'>" + esc(lg.desc) + "</span></td><td>" + money(lg.trip) + "</td></tr>"; });
     if (q.billed > 0) rows += "<tr><td>Wait time<span class='sub-l'>" + hrsText(q.billed) + " billed at " + money(WAITRATE) + "/hr</span></td><td>" + money(q.waitCost) + "</td></tr>";
-    if (q.ahf) rows += "<tr><td>After hours fee" + (q.vc * q.ahDays > 1 ? "<span class='sub-l'>" + money(AHF) + " x " + q.vc + (q.vc === 1 ? " vehicle" : " vehicles") + " x " + q.ahDays + (q.ahDays === 1 ? " day" : " days") + "</span>" : "") + "</td><td>" + money(q.ahf) + "</td></tr>";
+    if (q.ahf) rows += "<tr><td>After hours fee" + ((q.vc * q.ahDays > 1 || q.ahList) ? "<span class='sub-l'>" + money(AHF) + " x " + q.vc + (q.vc === 1 ? " vehicle" : " vehicles") + " x " + q.ahDays + (q.ahDays === 1 ? " day" : " days") + (q.ahList ? " (" + ahDayText(q) + ")" : "") + "</span>" : "") + "</td><td>" + money(q.ahf) + "</td></tr>";
     if (q.other) rows += "<tr><td>Other fees</td><td>" + money(q.other) + "</td></tr>";
     rows += "<tr class='total'><td>Total</td><td>" + money(q.total) + "</td></tr>";
     rows += payFull(q) ? "<tr class='muted'><td>Paid in full to confirm</td><td>" + money(q.total) + "</td></tr>" : "<tr class='muted'><td>Deposit to hold the date<span class='sub-l'>" + depositMath(q) + "</span></td><td>" + money(depositAmt(q)) + "</td></tr>";
@@ -725,7 +766,7 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
     if ($("broker").checked && sv("resv")) n.push("Reservation #" + sv("resv"));
     var ds = driversFor(i), amt = q.tips[i] + (i === 0 ? q.waitTip : 0);
     ds.forEach(function (drv, k) {
-      n.push((k === 0 && $("requested").checked && drv ? "Requested " : "") + (drv || "[Driver]") + " tip $" + nf(amt) + (i === 0 && q.waitTip > 0 ? " (incl. $" + nf(q.waitTip) + " wait)" : "") + ($("ahf").checked && isAfter(getT("ptime" + sf)) ? " +30 AHF" : ""));
+      n.push((k === 0 && $("requested").checked && drv ? "Requested " : "") + (drv || "[Driver]") + " tip $" + nf(amt) + (i === 0 && q.waitTip > 0 ? " (incl. $" + nf(q.waitTip) + " wait)" : "") + (ahOnLeg(i, sf, q) && $("ahf").checked ? " +30 AHF" : ""));
     });
     var guests = ds.map(function (d) { return DRIVER_EMAIL[d]; }).filter(Boolean);
     var d = sv("pdate" + sf), t = getT("ptime" + sf), url = "", miss = [];
@@ -951,7 +992,7 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
     h += "<table>";
     q.legList.forEach(function (lg, i) { h += "<tr><td>" + (q.legs > 1 ? "Trip " + (i + 1) + ": " : "") + esc(VEH[q.veh]) + " - " + esc(lg.desc) + "</td><td>" + money(lg.trip) + "</td></tr>"; });
     if (q.billed > 0) h += "<tr><td>Wait time, " + hrsText(q.billed) + " at " + money(WAITRATE) + "/hr</td><td>" + money(q.waitCost) + "</td></tr>";
-    if (q.ahf) h += "<tr><td>After hours fee (9pm-7am)</td><td>" + money(q.ahf) + "</td></tr>";
+    if (q.ahf) h += "<tr><td>After hours fee (9pm-7am)" + (q.ahList ? ", " + ahDayText(q) : "") + "</td><td>" + money(q.ahf) + "</td></tr>";
     if (q.other) h += "<tr><td>Other fees</td><td>" + money(q.other) + "</td></tr>";
     h += "<tr><td><b>TOTAL</b></td><td><b>" + money(q.total) + "</b></td></tr></table>";
     if (payFull(q)) h += '<div class="ln"><b>Deposit $</b> none &nbsp;&nbsp; <b>Paid in full:</b> ' + money(q.total) + " &nbsp; Date paid ________</div>";
