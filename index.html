@@ -408,7 +408,7 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
   <div class="totalbar" id="totalbar"><span>Total</span><b id="barTotal">$0</b></div>
 </div>
 
-<div id="pvbar"><button type="button" id="pvBack" style="color:#000;border-color:#000;background:#fff">Back to form</button><button type="button" id="pvPrint" style="background:#000;border-color:#000;color:#fff">Print</button><div>If Print does nothing on your iPad, tap Share in Safari, then Print. Or take a screenshot.</div></div>
+<div id="pvbar"><button type="button" id="pvBack" style="color:#000;border-color:#000;background:#fff">Back to form</button><button type="button" id="pvPrint" style="background:#000;border-color:#000;color:#fff">Print</button><button type="button" id="pvPdf" style="color:#000;border-color:#000;background:#fff">Save as PDF</button><div>Save as PDF makes a file you can open, email or print later. If Print does nothing on your iPad, tap Share in Safari, then Print.</div></div>
 <div id="sheet"></div>
 
 <script>
@@ -1016,6 +1016,67 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
   });
   $("pvBack").addEventListener("click", function () { document.body.classList.remove("pv"); window.scrollTo(0, 0); });
   $("pvPrint").addEventListener("click", function () { try { window.print(); } catch (e) {} });
+  // Simple text PDF (Letter size, Helvetica), built here so it works on any device with no extra files.
+  var HW = [].concat([278, 278, 355, 556, 556, 889, 667, 191, 333, 333, 389, 584, 278, 333, 278, 278], [556, 556, 556, 556, 556, 556, 556, 556, 556, 556], [278, 278, 584, 584, 584, 556], [1015],
+    [667, 667, 722, 722, 667, 611, 778, 722, 278, 500, 667, 556, 833, 722, 778, 667, 778, 722, 667, 611, 722, 667, 944, 667, 667, 611], [278, 278, 278, 469, 556], [333],
+    [556, 556, 500, 556, 556, 278, 556, 556, 222, 222, 500, 222, 833, 556, 556, 556, 556, 333, 500, 278, 556, 500, 722, 500, 500, 500], [334, 260, 334, 584]);
+  function pdfClean(s) {
+    return s.replace(/[ ]/g, " ").replace(/[–—]/g, "-").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/•/g, "*").replace(/\t/g, "   ").replace(/[^\x20-\x7e]/g, "");
+  }
+  function pdfWidth(s, size) { var w = 0; for (var i = 0; i < s.length; i++) w += HW[s.charCodeAt(i) - 32] || 556; return w * size / 1000; }
+  function pdfWrap(s, size, max) {
+    var out = [], cur = "";
+    s.split(" ").forEach(function (word) {
+      var t = cur ? cur + " " + word : word;
+      if (pdfWidth(t, size) <= max) { cur = t; return; }
+      if (cur) { out.push(cur); cur = ""; }
+      while (pdfWidth(word, size) > max) { var k = word.length; while (k > 1 && pdfWidth(word.slice(0, k), size) > max) k--; out.push(word.slice(0, k)); word = word.slice(k); }
+      cur = word;
+    });
+    out.push(cur); return out;
+  }
+  function makePdf(text) {
+    var lines = text.split("\n").map(pdfClean), pages = [[]], y = 738, first = true, L = 54, MAXW = 504;
+    function put(t, size, bold, gap) { if (y < 64) { pages.push([]); y = 738; } pages[pages.length - 1].push({ t: t, size: size, bold: bold, y: y }); y -= gap; }
+    lines.forEach(function (ln) {
+      ln = ln.replace(/\s+$/, "");
+      if (!ln.trim()) { y -= 6; return; }
+      var size = ln === "Greenbrier Limo" ? 16 : 11, bold = size === 16;
+      pdfWrap(ln, size, MAXW).forEach(function (w) { put(w, size, bold, size === 16 ? 22 : 15); });
+      first = false;
+    });
+    function esc2(t) { return t.replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)"); }
+    var objs = [], n = pages.length, kids = [];
+    for (var i = 0; i < n; i++) kids.push((6 + i * 2) + " 0 R");
+    objs[1] = "<< /Type /Catalog /Pages 2 0 R >>";
+    objs[2] = "<< /Type /Pages /Kids [" + kids.join(" ") + "] /Count " + n + " >>";
+    objs[3] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>";
+    objs[4] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>";
+    pages.forEach(function (pg, i) {
+      var s = pg.map(function (it) { return "BT /" + (it.bold ? "F2" : "F1") + " " + it.size + " Tf " + L + " " + it.y + " Td (" + esc2(it.t) + ") Tj ET"; }).join("\n");
+      objs[5 + i * 2] = "<< /Length " + s.length + " >>\nstream\n" + s + "\nendstream";
+      objs[6 + i * 2] = "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents " + (5 + i * 2) + " 0 R >>";
+    });
+    var out = "%PDF-1.4\n", offs = [], total = objs.length - 1;
+    for (var k = 1; k <= total; k++) { offs[k] = out.length; out += k + " 0 obj\n" + objs[k] + "\nendobj\n"; }
+    var xr = out.length;
+    out += "xref\n0 " + (total + 1) + "\n0000000000 65535 f \n";
+    for (var j = 1; j <= total; j++) out += ("0000000000" + offs[j]).slice(-10) + " 00000 n \n";
+    out += "trailer\n<< /Size " + (total + 1) + " /Root 1 0 R >>\nstartxref\n" + xr + "\n%%EOF";
+    return out;
+  }
+  $("pvPdf").addEventListener("click", function () {
+    var full = $("sheet").innerText || $("sheet").textContent, ck = $("sheet").querySelector(".chk"), ckt = ck ? (ck.innerText || ck.textContent) : "";
+    if (ckt && full.indexOf(ckt) >= 0) full = full.replace(ckt, "").replace(/^\s+/, "") + "\n\nChecklist\n" + ckt.split("\n").filter(function (x) { return x.trim(); }).map(function (x) { return "[   ] " + x.trim(); }).join("\n");
+    full = full.replace(/^\s*Deposit\s+Paid\s*$/m, "[   ] Deposit      [   ] Paid");
+    var pdf = makePdf(full), who = (sv("lead") || sv("cname") || "booking").replace(/[^A-Za-z0-9 _-]/g, "").trim().replace(/\s+/g, "-") || "booking";
+    var name = "Greenbrier-" + who + "-" + (sv("pdate") || new Date().toISOString().slice(0, 10)) + "-booking-sheet.pdf", bytes = new Uint8Array(pdf.length);
+    for (var i = 0; i < pdf.length; i++) bytes[i] = pdf.charCodeAt(i) & 255;
+    var url = URL.createObjectURL(new Blob([bytes], { type: "application/pdf" })), a = document.createElement("a");
+    a.href = url; a.download = name; document.body.appendChild(a); a.click();
+    setTimeout(function () { a.remove(); URL.revokeObjectURL(url); }, 4000);
+  });
+
 
   Array.prototype.forEach.call(document.querySelectorAll(".wrap h2"), function (h) {
     var t = h.textContent.trim();
