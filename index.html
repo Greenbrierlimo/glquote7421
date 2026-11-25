@@ -346,9 +346,11 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
 
       <section class="card o10">
         <h2>Payment</h2>
-        <label for="payopt">Deposit or pay in full</label>
-        <select id="payopt"><option value="dep">Deposit to hold the date</option><option value="full">Pay in full</option></select>
-        <p class="hint" style="margin-top:8px">A total of $150 or less is always paid in full. Take cards in Square only. Never type card numbers on this page.</p>
+        <div class="row"><div><label for="payopt">Deposit or pay in full</label>
+        <select id="payopt"><option value="dep">Deposit to hold the date</option><option value="full">Pay in full</option></select></div>
+        <div><label for="tdays">Trip days</label><input type="number" id="tdays" min="1" max="60" step="1" inputmode="numeric"><input type="checkbox" id="tdaysm" style="display:none" tabindex="-1" aria-hidden="true"></div></div>
+        <p class="hint" id="depmath" style="margin-top:6px"></p>
+        <p class="hint" style="margin-top:8px">The deposit is $150 per vehicle for each trip day. Trip days fills in from the pickup dates. Type over it for an overnight trip. A total no bigger than the deposit is paid in full. Take cards in Square only. Never type card numbers on this page.</p>
         <div class="btns" style="margin:6px 0 4px"><a class="btn" href="https://squareup.com/dashboard/invoices" target="_blank" rel="noopener">Open Square invoices</a><a class="btn" href="https://squareup.com/dashboard/virtual-terminal" target="_blank" rel="noopener">Square virtual terminal</a></div>
         <div class="row" style="margin-top:12px"><div><label for="paystat">Payment status</label><select id="paystat"><option value="Not paid">Not paid</option><option value="Deposit paid">Deposit paid</option><option value="Paid in full">Paid in full</option><option value="Invoice sent">Invoice sent</option></select></div><div><label for="sqinv">Square invoice #</label><input type="text" id="sqinv" autocomplete="off"></div></div>
         <div class="row one"><div><label for="sqlink">Square invoice or payment link</label><input type="text" id="sqlink" autocomplete="off" placeholder="Paste the link from Square"></div></div>
@@ -571,9 +573,15 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
 
   var lastTip = "", lastQuote = "";
 
-  function payFull(q) { return $("payopt").value === "full" || q.total <= DEPOSIT; }
+  function autoDays() { var d = {}; if ($("pdate").value) d[$("pdate").value] = 1; if (Math.floor(num("legs")) >= 2 && $("pdate2").value) d[$("pdate2").value] = 1; return Math.max(1, Object.keys(d).length); }
+  function tripDays() { if ($("tdaysm").checked) { var n = Math.floor(Number($("tdays").value)); if (n >= 1) return Math.min(n, 60); } return autoDays(); }
+  function depositAmt(q) { return DEPOSIT * tripDays() * q.vc; }
+  function depositMath(q) { var d = tripDays(); return money(DEPOSIT) + " x " + d + (d === 1 ? " day" : " days") + " x " + q.vc + (q.vc === 1 ? " vehicle" : " vehicles"); }
+  $("tdays").addEventListener("input", function () { $("tdaysm").checked = $("tdays").value.trim() !== ""; });
+  function payFull(q) { return $("payopt").value === "full" || q.total <= depositAmt(q); }
 
   function render() {
+    if (!$("tdaysm").checked) $("tdays").value = autoDays();
     timeCap("ptime"); timeCap("ptime2");
     $("d2row").hidden = vcount() < 2; $("d3row").hidden = vcount() < 3;
     var two = Math.floor(num("legs")) >= 2;
@@ -595,9 +603,10 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
     if (q.ahf) rows += "<tr><td>After hours fee" + (q.vc * q.ahDays > 1 ? "<span class='sub-l'>" + money(AHF) + " x " + q.vc + (q.vc === 1 ? " vehicle" : " vehicles") + " x " + q.ahDays + (q.ahDays === 1 ? " day" : " days") + "</span>" : "") + "</td><td>" + money(q.ahf) + "</td></tr>";
     if (q.other) rows += "<tr><td>Other fees</td><td>" + money(q.other) + "</td></tr>";
     rows += "<tr class='total'><td>Total</td><td>" + money(q.total) + "</td></tr>";
-    rows += payFull(q) ? "<tr class='muted'><td>Paid in full to confirm</td><td>" + money(q.total) + "</td></tr>" : "<tr class='muted'><td>Deposit to hold the date</td><td>" + money(DEPOSIT) + "</td></tr>";
-    if (!payFull(q)) rows += "<tr class='muted'><td>Balance due 1 to 2 days before</td><td>" + money(Math.max(0, q.total - DEPOSIT)) + "</td></tr>";
+    rows += payFull(q) ? "<tr class='muted'><td>Paid in full to confirm</td><td>" + money(q.total) + "</td></tr>" : "<tr class='muted'><td>Deposit to hold the date<span class='sub-l'>" + depositMath(q) + "</span></td><td>" + money(depositAmt(q)) + "</td></tr>";
+    if (!payFull(q)) rows += "<tr class='muted'><td>Balance due 1 to 2 days before</td><td>" + money(Math.max(0, q.total - depositAmt(q))) + "</td></tr>";
     $("qtable").innerHTML = rows;
+    $("depmath").textContent = payFull(q) ? ($("payopt").value === "full" ? "" : "Total is no more than the deposit (" + depositMath(q) + " = " + money(depositAmt(q)) + "), so it is paid in full.") : "Deposit: " + depositMath(q) + " = " + money(depositAmt(q)) + ".";
     $("barTotal").textContent = money(q.total);
 
     var w = [];
@@ -640,7 +649,7 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
     if (q.other) L.push("Other fees: " + money(q.other));
     L.push("Total: " + money(q.total));
     L.push("");
-    if (payFull(q)) L.push("Payment in full of " + money(q.total) + " confirms the booking."); else L.push("A " + money(DEPOSIT) + " deposit holds the date. The balance of " + money(Math.max(0, q.total - DEPOSIT)) + " is due 1 to 2 days before the trip.");
+    if (payFull(q)) L.push("Payment in full of " + money(q.total) + " confirms the booking."); else L.push("A " + money(depositAmt(q)) + " deposit" + (depositAmt(q) > DEPOSIT ? " (" + depositMath(q) + ")" : "") + " holds the date. The balance of " + money(Math.max(0, q.total - depositAmt(q))) + " is due 1 to 2 days before the trip.");
     L.push("");
     L.push("We observe a 24-hour cancellation policy.");
     L.push("Thank you for choosing Greenbrier Limo!");
@@ -760,7 +769,7 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
     } catch (e) { fallback(); }
   }
 
-  ["sendvia", "vcount", "driver2", "driver3", "t2d1", "t2d2", "t2d3", "sqlink", "depamt", "depdate", "balamt", "baldate", "sqnote", "cname", "company", "resv", "broker", "driver", "requested", "same", "dest2", "hrs2", "mins2", "ptail", "dtail", "pdate2", "ptime2", "paddr2", "ptail2", "daddr2", "dtail2", "legs", "aff", "payopt", "leadphone", "cphone", "cemail", "vehicle", "dest", "hrs", "mins", "event", "pdate", "lead", "pax", "bags", "seats", "golf", "paddr", "daddr", "other"].forEach(function (id) {
+  ["tdays", "sendvia", "vcount", "driver2", "driver3", "t2d1", "t2d2", "t2d3", "sqlink", "depamt", "depdate", "balamt", "baldate", "sqnote", "cname", "company", "resv", "broker", "driver", "requested", "same", "dest2", "hrs2", "mins2", "ptail", "dtail", "pdate2", "ptime2", "paddr2", "ptail2", "daddr2", "dtail2", "legs", "aff", "payopt", "leadphone", "cphone", "cemail", "vehicle", "dest", "hrs", "mins", "event", "pdate", "lead", "pax", "bags", "seats", "golf", "paddr", "daddr", "other"].forEach(function (id) {
     $(id).addEventListener("input", render); $(id).addEventListener("change", render);
   });
   ["wait", "waitMode"].forEach(function (id) {
@@ -946,7 +955,7 @@ a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(
     if (q.other) h += "<tr><td>Other fees</td><td>" + money(q.other) + "</td></tr>";
     h += "<tr><td><b>TOTAL</b></td><td><b>" + money(q.total) + "</b></td></tr></table>";
     if (payFull(q)) h += '<div class="ln"><b>Deposit $</b> none &nbsp;&nbsp; <b>Paid in full:</b> ' + money(q.total) + " &nbsp; Date paid ________</div>";
-    else h += '<div class="ln"><b>Deposit $</b> ' + money(DEPOSIT) + " &nbsp; Date paid ________ &nbsp;&nbsp; <b>Balance due $</b> " + money(Math.max(0, q.total - DEPOSIT)) + " &nbsp; Date paid ________</div>";
+    else h += '<div class="ln"><b>Deposit $</b> ' + money(depositAmt(q)) + " (" + depositMath(q) + ") &nbsp; Date paid ________ &nbsp;&nbsp; <b>Balance due $</b> " + money(Math.max(0, q.total - depositAmt(q))) + " &nbsp; Date paid ________</div>";
     h += '<div class="ln"><b>' + (q.vc > 1 ? "Drivers" : "Driver") + ':</b> ' + esc(q.legs > 1 ? q.legList.map(function (_, i) { return "Transfer " + (i + 1) + ": " + (driversFor(i).filter(Boolean).join(", ") || "not chosen"); }).join("  |  ") : drivers().filter(Boolean).join(", ")) + ($("requested").checked && sv("driver") ? " (requested)" : "") + ' &nbsp;&nbsp; <b>Tip:</b> ' + esc(lastTip) + "</div>";
     h += '<div class="ln"><b>Payment status:</b> ' + esc(sv("paystat")) + (sv("sqinv") ? ' &nbsp;&nbsp; <b>Square invoice #:</b> ' + esc(sv("sqinv")) : "") + "</div>";
     var sqb = [];
